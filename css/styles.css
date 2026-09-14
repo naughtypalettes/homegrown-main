@@ -333,6 +333,7 @@ textarea:focus-visible {
   display: block;
   width: 11rem;
   height: auto;
+  padding-block: 0.55rem;
   overflow: hidden;
 }
 
@@ -474,7 +475,7 @@ textarea:focus-visible {
   }
   .brand {
     width: 14rem;
-    height: 4.6rem;
+    height: auto;
   }
 }
 
@@ -1062,6 +1063,10 @@ textarea:focus-visible {
 .split-callout p {
   font-size: 1rem;
   max-width: 32rem;
+}
+
+.split-callout .button {
+  margin-top: 1.25rem;
 }
 
 @media (min-width: 900px) {
