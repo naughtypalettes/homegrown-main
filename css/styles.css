@@ -600,9 +600,21 @@ textarea:focus-visible {
 
 .pathway-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
   margin-top: 3rem;
+}
+
+@media (max-width: 860px) {
+  .pathway-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .pathway-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .pathway-card {
