@@ -1632,11 +1632,12 @@ textarea:focus-visible {
 }
 
 .agm-detail-card .button {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  padding: 1.1rem 1.75rem;
 }
 
 .agm-hospitality {
-  padding: clamp(3rem, 7vw, 5rem) 0;
+  padding: clamp(4.5rem, 9vw, 7rem) 0;
 }
 
 .agm-hospitality-grid {
