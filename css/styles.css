@@ -1539,3 +1539,184 @@ textarea:focus-visible {
   margin-top: 0.35rem;
   font-size: 0.95rem;
 }
+
+/* ==========================================================================
+   Annual General Meeting page
+   ========================================================================== */
+
+.agm-hero {
+  background:
+    radial-gradient(circle at 85% 18%, rgba(252, 188, 46, 0.18), transparent 26rem),
+    var(--color-charcoal-deep);
+  color: var(--color-paper);
+  padding: clamp(3.5rem, 8vw, 7rem) 0;
+  overflow: hidden;
+}
+
+.agm-hero-grid {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+.agm-year {
+  color: var(--color-gold);
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: var(--weight-heading);
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  -webkit-text-stroke: 2px var(--color-gold);
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.3rem;
+}
+
+.agm-hero h1 {
+  color: var(--color-gold);
+  font-size: clamp(3rem, 9vw, 6.8rem);
+  max-width: 10ch;
+  text-transform: uppercase;
+}
+
+.agm-intro {
+  color: var(--color-hero-lede);
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.55;
+  margin-top: 1.5rem;
+  max-width: 35rem;
+}
+
+.agm-poster-wrap {
+  margin: 0;
+  width: min(100%, 30rem);
+  justify-self: center;
+  border: 2px solid var(--color-gold);
+  box-shadow: 1rem 1rem 0 rgba(252, 188, 46, 0.18);
+  transform: rotate(1.2deg);
+}
+
+.agm-poster-wrap img {
+  width: 100%;
+  height: auto;
+}
+
+.agm-details {
+  background: var(--color-soft);
+}
+
+.agm-details-grid {
+  display: grid;
+  gap: 3rem;
+}
+
+.agm-detail-cards {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.agm-detail-card {
+  background: var(--color-paper);
+  border-top: 0.45rem solid var(--color-gold);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  box-shadow: 0 1rem 2rem rgba(37, 48, 48, 0.08);
+}
+
+.agm-detail-card h3 {
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  margin-top: 1.2rem;
+}
+
+.agm-detail-card p:not(.card-label) {
+  margin-top: 1rem;
+  line-height: 1.65;
+}
+
+.agm-detail-card .button {
+  margin-top: 1.5rem;
+}
+
+.agm-hospitality {
+  padding: clamp(3rem, 7vw, 5rem) 0;
+}
+
+.agm-hospitality-grid {
+  display: grid;
+  gap: 1.5rem;
+  align-items: end;
+}
+
+.agm-hospitality h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  max-width: 16ch;
+}
+
+.agm-hospitality-grid > p {
+  font-size: 1.15rem;
+  font-weight: var(--weight-bold);
+  max-width: 26rem;
+}
+
+@media (max-width: 759px) {
+  .funding-strip-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-block: 0.55rem;
+  }
+
+  .funding-strip-inner a {
+    white-space: normal;
+  }
+
+  .agm-hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .agm-hero-grid,
+  .agm-hero-copy,
+  .agm-poster-wrap {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .agm-hero-copy,
+  .agm-poster-wrap {
+    width: 100%;
+  }
+
+  .agm-hero-copy {
+    overflow-wrap: anywhere;
+  }
+
+  .agm-hero .button-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .agm-hero .text-link {
+    margin-top: 0.25rem;
+  }
+}
+
+@media (min-width: 760px) {
+  .agm-detail-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .agm-hospitality-grid {
+    grid-template-columns: 1.5fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .agm-hero-grid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.75fr);
+    gap: clamp(3rem, 7vw, 6rem);
+  }
+
+  .agm-details-grid {
+    grid-template-columns: minmax(0, 0.8fr) minmax(30rem, 1.2fr);
+    align-items: start;
+  }
+}
