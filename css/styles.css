@@ -489,10 +489,7 @@ textarea:focus-visible {
 }
 
 .hero-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
-  align-items: center;
+  display: block;
 }
 
 .hero-copy h1 {
@@ -506,49 +503,6 @@ textarea:focus-visible {
   margin: 1.75rem 0 0;
   font-size: clamp(1.1rem, 2vw, 1.42rem);
   line-height: 1.5;
-}
-
-.hero-image-wrap {
-  position: relative;
-  border: 0.45rem solid var(--color-gold);
-  box-shadow: 0.7rem 0.7rem 0 var(--color-dusty-teal);
-  max-width: 30rem;
-  margin-inline: auto;
-}
-
-.hero-image {
-  width: 100%;
-  display: block;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  object-position: 65% center;
-}
-
-.image-note {
-  position: absolute;
-  bottom: -0.1rem;
-  left: -0.1rem;
-  background: var(--color-charcoal-deep);
-  color: var(--color-gold);
-  font-weight: 900;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.5rem 0.75rem;
-}
-
-@media (min-width: 861px) {
-  .hero-grid {
-    grid-template-columns: 1.08fr 0.92fr;
-    gap: clamp(3rem, 6vw, 6rem);
-  }
-  .hero-image-wrap {
-    max-width: 39rem;
-    margin-inline: 0;
-  }
-  .hero-image {
-    aspect-ratio: 4 / 5;
-  }
 }
 
 /* ==========================================================================
