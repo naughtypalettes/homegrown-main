@@ -1044,6 +1044,51 @@ textarea:focus-visible {
   font-size: 1.05rem;
 }
 
+
+
+/* ==========================================================================
+   Newsletter signup
+   ========================================================================== */
+
+.newsletter-section {
+  background: var(--color-charcoal-deep);
+  color: var(--color-paper);
+}
+
+.newsletter-inner {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.newsletter-copy h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  margin-top: 0.5rem;
+}
+
+.newsletter-copy p {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 40rem;
+  color: var(--color-hero-lede);
+}
+
+.newsletter-action {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 800px) {
+  .newsletter-inner {
+    grid-template-columns: 1.4fr 1fr;
+    justify-content: space-between;
+  }
+  .newsletter-action {
+    justify-content: flex-end;
+  }
+}
+
 /* ==========================================================================
    Footer
    ========================================================================== */
