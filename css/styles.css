@@ -1490,6 +1490,85 @@ textarea:focus-visible {
   display: inline-flex;
 }
 
+/* Field Law Community Fund voting section */
+.fieldlaw-vote-section {
+  background: linear-gradient(135deg, var(--color-charcoal-deep) 0%, #2a3535 100%);
+  color: var(--color-paper);
+}
+
+.fieldlaw-vote-section h2 {
+  color: var(--color-paper);
+}
+
+.fieldlaw-vote-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.fieldlaw-vote-content {
+  max-width: 50rem;
+}
+
+.fieldlaw-vote-content p {
+  color: var(--color-hero-lede);
+  font-size: 1.05rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.fieldlaw-vote-details {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+}
+
+.fieldlaw-vote-details h3 {
+  color: var(--color-gold);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.vote-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.vote-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.vote-benefits .check {
+  color: var(--color-gold);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.vote-deadline {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.9rem;
+}
+
+.vote-deadline strong {
+  color: var(--color-gold);
+}
+
+@media (min-width: 760px) {
+  .fieldlaw-vote-grid {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+}
+
 .lane-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
