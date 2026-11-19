@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What kind of storyteller are you? | SPARKS</title>
+<meta name="description" content="Find your storytelling archetype in about 90 seconds and help shape SPARKS 2027, a project-based mentorship program for emerging Alberta storytellers.">
+<meta name="theme-color" content="#0e0d0b">
+<meta property="og:type" content="website">
+<meta property="og:title" content="What kind of storyteller are you? | SPARKS">
+<meta property="og:description" content="Find your storytelling archetype and help shape SPARKS 2027, a mentorship program for emerging Alberta storytellers.">
+<meta property="og:site_name" content="Homegrown Arts &amp; Media Collective">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/favicon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e0d0b; --ink:#f4efe6; --mut:#9a9387; --line:#2a2722;
+    --acc:#f0b429; --acc2:#ff6a1f; --card:#171512;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg); color:var(--ink); font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:50; opacity:.16; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .glow{position:fixed;width:520px;height:520px;border-radius:50%;filter:blur(110px);opacity:.22;pointer-events:none;z-index:0}
+  .glow.a{background:var(--acc2);top:-200px;right:-180px}
+  .glow.b{background:var(--acc);bottom:-260px;left:-220px;opacity:.14}
+  .app{position:relative;z-index:1;max-width:520px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;padding:20px 22px 32px}
+  .top{display:flex;align-items:center;gap:14px;height:36px;margin-bottom:8px}
+  .brand{font-family:'Outfit',sans-serif;font-weight:800;letter-spacing:.14em;font-size:13px;color:var(--acc)}
+  .bar{flex:1;height:5px;background:var(--line);border-radius:9px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:9px;transition:width .4s ease}
+  .back{background:none;border:0;color:var(--mut);font:500 13px 'Inter';cursor:pointer;padding:6px 0;min-width:44px;text-align:right}
+  .back[hidden]{visibility:hidden;display:block}
+  .stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding:18px 0}
+  .screen{animation:in .35s ease both}
+  @keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .kicker{font:600 12px 'Inter';letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin-bottom:14px}
+  h1,h2{font-family:'Outfit',sans-serif;font-weight:700;line-height:1.02;letter-spacing:-.02em}
+  h1{font-size:clamp(46px,13vw,68px);font-weight:800}
+  h1 em{font-style:normal;color:var(--acc)}
+  h2{font-size:clamp(30px,8.4vw,40px);margin-bottom:10px}
+  .sub{color:var(--mut);font-size:16px;line-height:1.5;margin:16px 0 28px;max-width:40ch}
+  .hint{color:var(--mut);font-size:14px;margin-bottom:22px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--acc);color:#14110a;border:0;border-radius:999px;
+    font:700 16px 'Outfit',sans-serif;padding:16px 28px;cursor:pointer;text-decoration:none;
+    transition:transform .15s ease, filter .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+  .btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--acc);color:var(--acc)}
+  .btn.block{width:100%}
+  .opts{display:grid;gap:10px}
+  .opts.two{grid-template-columns:1fr 1fr}
+  .opt{
+    text-align:left;background:var(--card);border:1.5px solid var(--line);color:var(--ink);
+    border-radius:18px;padding:17px 18px;font:500 16px/1.35 'Inter';cursor:pointer;
+    transition:border-color .15s, transform .15s, background .15s;
+  }
+  .opt:hover{border-color:var(--acc);transform:translateX(3px)}
+  .opt.sel{border-color:var(--acc);background:#251f10}
+  .opt b{display:block;font:700 17px 'Outfit';margin-bottom:3px}
+  .opt small{color:var(--mut);font-size:13.5px}
+  .opts.two .opt{text-align:center;padding:30px 12px;font:700 19px 'Outfit'}
+  .opts.two .opt:hover{transform:translateY(-3px)}
+  .tok{display:flex;align-items:center;gap:12px;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:12px 14px}
+  .tok .l{flex:1;font-weight:500;font-size:15px}
+  .tok button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:none;color:var(--ink);font:600 18px 'Inter';cursor:pointer}
+  .tok button:hover{border-color:var(--acc);color:var(--acc)}
+  .tok .dots{display:flex;gap:4px;min-width:64px;justify-content:center}
+  .tok .dots i{width:11px;height:11px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px #f0b42966}
+  .pool{display:flex;gap:7px;align-items:center;margin-bottom:16px;font:600 13px 'Inter';color:var(--mut)}
+  .pool i{width:15px;height:15px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px #f0b42966}
+  .pool i.off{background:var(--line);box-shadow:none}
+  .result .big{font-family:'Outfit';font-weight:800;font-size:clamp(46px,13vw,70px);line-height:.95;letter-spacing:-.025em;margin:4px 0 14px;color:var(--acc)}
+  .result .tag{font:600 19px/1.3 'Outfit';margin-bottom:12px}
+  .result p{color:var(--mut);line-height:1.55;font-size:15.5px;margin-bottom:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 22px}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--ink)}
+  .chip span{color:var(--mut);margin-right:6px}
+  .ctas{display:grid;gap:10px;margin-top:6px}
+  .fine{color:var(--mut);font-size:12.5px;margin-top:18px;line-height:1.5;text-align:center}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--acc);color:#14110a;font:700 14px 'Outfit';padding:11px 20px;border-radius:999px;z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
+  .toast.on{opacity:1}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){.screen{animation:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="glow a"></div><div class="glow b"></div>
+<div class="app">
+  <div class="top">
+    <div class="brand">SPARKS</div>
+    <div class="bar"><i id="prog"></i></div>
+    <button class="back" id="back" hidden>Back</button>
+  </div>
+  <div class="stage" id="stage"></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  // Paste your Google Apps Script Web App URL here (see apps-script.gs). Leave empty to disable saving.
+  var ENDPOINT="";
+  var MENTEE="https://forms.gle/PR2uiwTydDtHRMvi8";
+  var MENTOR="https://forms.gle/3NtMbT7Mh149jYZWA";
+
+  var ARCH={
+    doc:{name:"The Documentarian",tag:"You find the story that's already in the room.",
+      body:"You trust real voices, real places, and the details nobody else thought to keep. Your strength is patience: you listen longer than most people and notice what's left unsaid. Your stories don't need a twist. They need to be told truthfully."},
+    world:{name:"The Worldbuilder",tag:"You build the room first, then let people in.",
+      body:"You think in systems, histories, and rules that make an invented place feel lived-in. Your strength is imagination with structure: you plan the twist before the audience knows there's a question. You tend to have more ideas than hours."},
+    voice:{name:"The Voice",tag:"You hear the story before you see it.",
+      body:"Rhythm, tone, and the sound of a line matter to you. Whether it's spoken word, audio, or prose, your stories land because they sound like a person. Your strength is a point of view people can recognize in one sentence."},
+    image:{name:"The Frame-Chaser",tag:"You think in frames, light, and the one shot that says it all.",
+      body:"You notice composition, colour, and mood where others see a scene. Your strength is making people feel something before a single word is spoken. Your stories often start as a picture you can't shake."}
+  };
+
+  var STEPS=[
+    {id:"intro"},
+    {id:"start",type:"single",arch:true,kicker:"Round 1 · Instinct",q:"Where does your story begin?",
+      opts:[["doc","A stranger's kitchen table, recorder running"],["world","A map of a place that doesn't exist yet"],["voice","A voice you can't stop hearing"],["image","One frame, perfectly lit"]]},
+    {id:"end",type:"single",arch:true,kicker:"Round 2 · Instinct",q:"Your story needs an ending. You…",
+      opts:[["doc","Leave it true and unresolved"],["world","Land a twist nobody saw coming"],["voice","End on a line people repeat"],["image","End on an image people remember"]]},
+    {id:"medium",type:"single",kicker:"Round 3 · Your craft",q:"Which medium are you most excited to grow in?",
+      opts:[["Film / video"],["Audio / podcast"],["Writing / poetry"],["Photography / visual art"],["Performance / spoken word"],["Games / interactive"],["Not sure yet"]]},
+    {id:"stage",type:"single",kicker:"Round 4 · Where you're at",q:"Right now, you're…",
+      opts:[["Just starting","Ideas, no finished work yet"],["A few projects in","Some work, still finding my voice"],["Shared publicly","Screened, published, or performed"],["Working at it seriously","Paid or semi-professional work"]]},
+    {id:"blocker",type:"single",kicker:"Round 5 · The wall",q:"What's the biggest thing standing between you and your next project?",
+      opts:[["Money or gear"],["Honest feedback"],["Finding an audience"],["Time"],["Confidence"],["Knowing the right people"]]},
+    {id:"format",type:"two",kicker:"Round 6 · This or that",q:"How do you learn best?",
+      opts:[["One-on-one","With a mentor, just me"],["In a cohort","With other storytellers"]]},
+    {id:"tokens",type:"tokens",kicker:"Round 7 · You're the funder",q:"You have 5 tokens. Spend them on what SPARKS should include.",
+      hint:"Tap + to back what matters most. Spend all 5.",
+      feats:[["mentor","1:1 time with a mentor"],["workshops","Workshops and skill sessions"],["funding","Funding for your project"],["showcase","A public showcase or screening"],["peers","A community of peers"],["intros","Introductions to industry people"]]},
+    {id:"pace",type:"single",kicker:"Round 8 · Rhythm",q:"What schedule would you actually keep?",
+      opts:[["Weekly evenings"],["Weekend intensives"],["Flexible, mostly online"],["A mix of in-person and online"]]},
+    {id:"where",type:"single",kicker:"Round 9 · Home turf",q:"Where does your story start from in Alberta?",
+      opts:[["Calgary area"],["Edmonton area"],["Red Deer / Central Alberta"],["Another city or town"],["Rural or remote"],["Outside Alberta"]]},
+    {id:"hang",type:"single",kicker:"Last one",q:"Where do you hear about this kind of thing?",
+      opts:[["Instagram"],["TikTok"],["Discord / online communities"],["School or campus"],["Events and word of mouth"],["Email"]]},
+    {id:"result"}
+  ];
+
+  var FEAT_MATCH={
+    mentor:"a dedicated mentor in your corner",
+    workshops:"hands-on workshops to sharpen your craft",
+    funding:"real support to get your project made",
+    showcase:"a public moment to show the finished work",
+    peers:"a cohort of fellow storytellers",
+    intros:"doors opened to people in the industry"
+  };
+
+  var stage=document.getElementById("stage"),prog=document.getElementById("prog"),
+      back=document.getElementById("back"),toastEl=document.getElementById("toast");
+  var i=0, ans={}, tokens={}, scoreLog={};
+  var QCOUNT=STEPS.length-2;
+
+  function toast(m){toastEl.textContent=m;toastEl.className="toast on";setTimeout(function(){toastEl.className="toast"},1800)}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+  function go(n){
+    i=n; render();
+    prog.style.width=(Math.max(0,Math.min(i,QCOUNT+1))/(QCOUNT+1)*100)+"%";
+    back.hidden=(i===0||i===STEPS.length-1);
+    window.scrollTo(0,0);
+  }
+  back.onclick=function(){if(i>0)go(i-1)};
+
+  function render(){
+    var s=STEPS[i], h="";
+    if(s.id==="intro"){
+      h='<div class="screen"><div class="kicker">Alberta emerging storytellers</div>'+
+        '<h1>What kind of <em>storyteller</em> are you?</h1>'+
+        '<p class="sub">Nine quick taps. Find your storytelling archetype and help shape SPARKS, a project-based mentorship program built around what you actually need.</p>'+
+        '<button class="btn" id="start">Let\'s find out →</button>'+
+        '<p class="fine" style="text-align:left;margin-top:16px">About 90 seconds. No account, no essay questions.</p></div>';
+      stage.innerHTML=h;
+      document.getElementById("start").onclick=function(){go(1)};
+      return;
+    }
+    if(s.id==="result"){renderResult();return}
+    if(s.type==="single"||s.type==="two"){
+      h='<div class="screen"><div class="kicker">'+esc(s.kicker)+'</div><h2>'+esc(s.q)+'</h2><div style="height:18px"></div>'+
+        '<div class="opts'+(s.type==="two"?" two":"")+'">';
+      s.opts.forEach(function(o,k){
+        var val=s.arch?o[0]:o[0], label=s.arch?o[1]:o[0], sub=(!s.arch&&o[1])?o[1]:"";
+        var sel=(ans[s.id]===val)?" sel":"";
+        h+='<button class="opt'+sel+'" data-v="'+esc(val)+'">'+(sub?'<b>'+esc(label)+'</b><small>'+esc(sub)+'</small>':esc(label))+'</button>';
+      });
+      h+='</div></div>';
+      stage.innerHTML=h;
+      var btns=stage.querySelectorAll(".opt");
+      for(var k=0;k<btns.length;k++){btns[k].onclick=(function(b){return function(){
+        ans[s.id]=b.getAttribute("data-v");
+        var all=stage.querySelectorAll(".opt");for(var j=0;j<all.length;j++)all[j].classList.remove("sel");
+        b.classList.add("sel");
+        setTimeout(function(){go(i+1)},260);
+      }})(btns[k])}
+      return;
+    }
+    if(s.type==="tokens"){
+      h='<div class="screen"><div class="kicker">'+esc(s.kicker)+'</div><h2>'+esc(s.q)+'</h2><p class="hint">'+esc(s.hint)+'</p>'+
+        '<div class="pool" id="pool" aria-live="polite"></div><div class="opts" id="tl"></div><div style="height:20px"></div>'+
+        '<button class="btn block" id="tnext" disabled>Lock it in →</button></div>';
+      stage.innerHTML=h;
+      drawTokens(s);
+      document.getElementById("tnext").onclick=function(){go(i+1)};
+    }
+  }
+
+  function spent(){var t=0;for(var k in tokens)t+=tokens[k];return t}
+  function drawTokens(s){
+    var left=5-spent(), p="";
+    for(var k=0;k<5;k++)p+='<i class="'+(k<left?"":"off")+'"></i>';
+    p+='<span style="margin-left:6px">'+left+' left</span>';
+    document.getElementById("pool").innerHTML=p;
+    var h="";
+    s.feats.forEach(function(f){
+      var n=tokens[f[0]]||0, d="";
+      for(var k=0;k<n;k++)d+="<i></i>";
+      h+='<div class="tok"><div class="l">'+esc(f[1])+'</div><button data-k="'+f[0]+'" data-d="-1" aria-label="Remove token">−</button><div class="dots">'+d+'</div><button data-k="'+f[0]+'" data-d="1" aria-label="Add token">+</button></div>';
+    });
+    var tl=document.getElementById("tl"); tl.innerHTML=h;
+    var bs=tl.querySelectorAll("button");
+    for(var k=0;k<bs.length;k++){bs[k].onclick=function(){
+      var key=this.getAttribute("data-k"), d=parseInt(this.getAttribute("data-d"),10), cur=tokens[key]||0;
+      if(d>0&&spent()>=5)return;
+      if(d<0&&cur<=0)return;
+      tokens[key]=cur+d; drawTokens(s);
+    }}
+    document.getElementById("tnext").disabled=(spent()!==5);
+  }
+
+  var sent=false;
+  function submit(payload){
+    if(sent)return; sent=true;
+    payload.submitted_at=new Date().toISOString();
+    payload.tokens_json=JSON.stringify(payload.tokens);
+    try{console.log("SPARKS response",JSON.stringify(payload))}catch(e){}
+    if(!ENDPOINT)return;
+    try{
+      fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)}).catch(function(){});
+    }catch(e){}
+  }
+
+  function pickArch(){
+    var sc={doc:0,world:0,voice:0,image:0};
+    if(ans.start)sc[ans.start]+=1.1;
+    if(ans.end)sc[ans.end]+=1;
+    var best="doc",bv=-1;
+    ["doc","world","voice","image"].forEach(function(k){if(sc[k]>bv){bv=sc[k];best=k}});
+    return best;
+  }
+
+  function topFeat(){
+    var best=null,bv=0;
+    for(var k in tokens){if(tokens[k]>bv){bv=tokens[k];best=k}}
+    return best;
+  }
+
+  function renderResult(){
+    prog.style.width="100%"; back.hidden=true;
+    var key=pickArch(), a=ARCH[key], tf=topFeat();
+    var payload={archetype:key,medium:ans.medium,stage:ans.stage,blocker:ans.blocker,format:ans.format,
+      tokens:tokens,pace:ans.pace,region:ans.where,channel:ans.hang};
+    submit(payload);
+    var h='<div class="screen result"><div class="kicker">Your archetype</div>'+
+      '<div class="big">'+esc(a.name)+'</div><div class="tag">'+esc(a.tag)+'</div>'+
+      '<p>'+esc(a.body)+'</p>'+
+      '<div class="chips">'+
+        '<div class="chip"><span>Craft</span>'+esc(ans.medium||"")+'</div>'+
+        '<div class="chip"><span>Stage</span>'+esc(ans.stage||"")+'</div>'+
+        '<div class="chip"><span>Learns best</span>'+esc(ans.format||"")+'</div>'+
+        '<div class="chip"><span>Needs most</span>'+esc(ans.blocker||"")+'</div>'+
+      '</div>'+
+      (tf?'<p>Based on how you spent your tokens, SPARKS is built for you: '+esc(FEAT_MATCH[tf])+'.</p>':'')+
+      '<div class="ctas">'+
+        '<a class="btn block" href="'+MENTEE+'" target="_blank" rel="noopener">Apply as a mentee →</a>'+
+        '<a class="btn ghost block" href="'+MENTOR+'" target="_blank" rel="noopener">I\'d rather mentor</a>'+
+        '<button class="btn ghost block" id="copy">Copy my result to share</button>'+
+      '</div>'+
+      '<p class="fine">Thanks for helping shape SPARKS 2027. Know a storyteller who\'d get a different result? Send them the quiz.</p></div>';
+    stage.innerHTML=h;
+    document.getElementById("copy").onclick=function(){
+      var t="I'm "+a.name+" 🔥 "+a.tag+" Find your storyteller type with SPARKS, a mentorship program for emerging Alberta storytellers.";
+      try{
+        navigator.clipboard.writeText(t).then(function(){toast("Copied!")},function(){toast("Couldn't copy, select and copy manually")});
+      }catch(e){toast("Couldn't copy")}
+    };
+  }
+
+  go(0);
+})();
+</script>
+</body>
+</html>
