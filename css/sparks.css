@@ -52,10 +52,14 @@ body.sparks {
 }
 
 .sparks .brand {
-  /* logo is dark ink; sit it on a paper tile so it stays legible */
-  background: var(--sp-ink);
-  padding: 0.45rem 0.75rem;
-  margin-block: 0.5rem;
+  padding-block: 0.55rem;
+}
+
+/* Logo is dark ink on an opaque light background: invert it for the dark bar
+   and let the (now dark) background blend into the halftone ground. */
+.sparks .brand img {
+  filter: invert(1) hue-rotate(180deg) brightness(1.15);
+  mix-blend-mode: screen;
 }
 
 .sparks .desktop-nav a:not(.button),
