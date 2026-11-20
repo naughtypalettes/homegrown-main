@@ -42,6 +42,85 @@ body.sparks {
   z-index: 1;
 }
 
+/* Site header: dark halftone bar to match the page */
+.sparks .site-header {
+  background-color: var(--sp-bg);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1.3px, transparent 1.7px);
+  background-size: 9px 9px;
+  border-bottom: 2px solid var(--sp-line);
+  color: var(--sp-ink);
+}
+
+.sparks .brand {
+  padding-block: 0.55rem;
+}
+
+/* Logo is dark ink on an opaque light background: invert it for the dark bar
+   and let the (now dark) background blend into the halftone ground. */
+.sparks .brand img {
+  filter: invert(1) hue-rotate(180deg) brightness(1.15);
+  mix-blend-mode: screen;
+}
+
+.sparks .desktop-nav a:not(.button),
+.sparks .nav-dropdown-toggle {
+  font-family: var(--sp-text);
+  font-weight: 700;
+  color: var(--sp-ink);
+}
+
+.sparks .desktop-nav a:not(.button):hover,
+.sparks .nav-dropdown-toggle:hover {
+  color: var(--sp-coral);
+  text-decoration-color: var(--sp-coral);
+}
+
+.sparks .desktop-nav .button {
+  min-height: 2.75rem;
+  padding: 0.65rem 1.1rem;
+  font-size: 0.9rem;
+}
+
+.sparks .button-green {
+  background: #2f6b4f;
+  border-color: #2f6b4f;
+  color: var(--sp-ink);
+}
+
+.sparks .button-green:hover {
+  background: var(--sp-gold);
+  border-color: var(--sp-gold);
+  color: #141414;
+}
+
+.sparks .nav-dropdown-menu,
+.sparks .mobile-nav nav {
+  background: var(--sp-card);
+  border: 2px solid var(--sp-line);
+  border-radius: 0;
+  box-shadow: 0.4rem 0.4rem 0 var(--sp-coral);
+}
+
+.sparks .nav-dropdown-menu a,
+.sparks .mobile-nav nav a {
+  font-family: var(--sp-text);
+  color: var(--sp-ink);
+  border-radius: 0;
+}
+
+.sparks .nav-dropdown-menu a:hover,
+.sparks .mobile-nav nav a:hover {
+  background: var(--sp-bg);
+  color: var(--sp-coral);
+  border-radius: 0;
+}
+
+.sparks .mobile-nav summary {
+  border: 2px solid var(--sp-line);
+  border-radius: 0;
+  color: var(--sp-ink);
+}
+
 /* Starburst */
 .sp-burst {
   position: absolute;
