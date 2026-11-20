@@ -94,28 +94,54 @@ body.sparks {
 }
 
 .sparks .nav-dropdown-menu,
-.sparks .mobile-nav nav {
+.sparks .mobile-nav-panel {
   background: var(--sp-card);
   border: 2px solid var(--sp-line);
   border-radius: 0;
   box-shadow: 0.4rem 0.4rem 0 var(--sp-coral);
 }
 
-.sparks .nav-dropdown-menu a,
-.sparks .mobile-nav nav a {
+.sparks .nav-dropdown-menu a {
   font-family: var(--sp-text);
   color: var(--sp-ink);
   border-radius: 0;
 }
 
-.sparks .nav-dropdown-menu a:hover,
-.sparks .mobile-nav nav a:hover {
+.sparks .nav-dropdown-menu a:hover {
   background: var(--sp-bg);
   color: var(--sp-coral);
   border-radius: 0;
 }
 
-.sparks .mobile-nav summary {
+.sparks .mobile-nav-link,
+.sparks .mobile-nav-group > summary,
+.sparks .mobile-nav-sub a {
+  font-family: var(--sp-text);
+  color: var(--sp-ink);
+}
+
+.sparks .mobile-nav-link,
+.sparks .mobile-nav-group > summary,
+.sparks .mobile-nav-sub {
+  border-bottom-color: var(--sp-line);
+}
+
+.sparks .mobile-nav-sub a {
+  border-left-color: var(--sp-line);
+}
+
+.sparks .mobile-nav-link:hover,
+.sparks .mobile-nav-group > summary:hover,
+.sparks .mobile-nav-sub a:hover {
+  color: var(--sp-coral);
+}
+
+.sparks .mobile-nav-panel a[aria-current="page"] {
+  border-left-color: var(--sp-coral);
+  text-decoration-color: var(--sp-coral);
+}
+
+.sparks .mobile-nav > summary {
   border: 2px solid var(--sp-line);
   border-radius: 0;
   color: var(--sp-ink);

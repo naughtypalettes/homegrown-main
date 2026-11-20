@@ -417,19 +417,17 @@ textarea:focus-visible {
   background: var(--color-soft);
 }
 
+/* Mobile nav: a <details> toggle whose panel drops down full-width under the
+   sticky header (the header is the containing block), centred and capped so
+   it never reads as a narrow side popover. Link groups are nested <details>
+   accordions, so the whole menu works without JavaScript. */
 .mobile-nav {
-  position: relative;
+  position: static;
 }
 
 .mobile-nav summary {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: 2px solid var(--color-charcoal-deep);
-  border-radius: var(--radius);
-  padding: 0.5rem;
   list-style: none;
+  cursor: pointer;
 }
 
 .mobile-nav summary::-webkit-details-marker,
@@ -438,32 +436,118 @@ textarea:focus-visible {
   content: "";
 }
 
-.mobile-nav[open] summary svg {
-  transform: rotate(90deg);
+.mobile-nav > summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 2px solid var(--color-charcoal-deep);
+  border-radius: var(--radius);
 }
 
-.mobile-nav nav {
+.mobile-nav .icon-close,
+.mobile-nav[open] .icon-open {
+  display: none;
+}
+
+.mobile-nav[open] .icon-close {
+  display: block;
+}
+
+.mobile-nav-panel {
   position: absolute;
-  top: calc(100% + 0.6rem);
+  top: calc(100% + 0.5rem);
+  left: 0;
   right: 0;
-  width: 15rem;
+  width: min(calc(100% - 2.5rem), 30rem);
+  margin-inline: auto;
+  max-height: calc(100vh - 7rem);
+  max-height: calc(100dvh - 7rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: var(--color-paper);
   border: 2px solid var(--color-charcoal-deep);
-  box-shadow: 0.5rem 0.5rem 0 var(--color-gold);
-  padding: 0.75rem;
+  border-radius: var(--radius);
+  box-shadow: 0.4rem 0.4rem 0 var(--color-gold);
+  padding: 0.5rem 1rem 1rem;
   display: flex;
   flex-direction: column;
 }
 
-.mobile-nav nav a {
-  padding: 0.8rem;
+.mobile-nav-link,
+.mobile-nav-group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3.25rem;
+  padding: 0.25rem 0.25rem;
   font-weight: 800;
+  font-size: 1.05rem;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(52, 65, 65, 0.14);
+}
+
+.mobile-nav-group > summary svg {
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.mobile-nav-group[open] > summary svg {
+  transform: rotate(180deg);
+}
+
+.mobile-nav-sub {
+  display: flex;
+  flex-direction: column;
+  padding: 0.35rem 0 0.6rem;
+  border-bottom: 1px solid rgba(52, 65, 65, 0.14);
+}
+
+.mobile-nav-sub a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.25rem 0.75rem;
+  margin-left: 0.25rem;
+  border-left: 3px solid var(--color-soft);
+  font-weight: 700;
   text-decoration: none;
 }
 
-.mobile-nav nav a:hover {
-  background: var(--color-soft);
-  border-radius: var(--radius);
+.mobile-nav-link:hover,
+.mobile-nav-group > summary:hover,
+.mobile-nav-sub a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.mobile-nav-panel a[aria-current="page"] {
+  border-left-color: var(--color-gold);
+  text-decoration: underline;
+  text-decoration-color: var(--color-gold);
+  text-decoration-thickness: 0.15rem;
+  text-underline-offset: 0.3rem;
+}
+
+.mobile-nav-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Extra .mobile-nav in the selector so the SPARKS theme's .sparks .button
+   sizing can't make these labels wrap. */
+.mobile-nav .mobile-nav-actions .button {
+  min-height: 3rem;
+  padding-inline: 0.5rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.mobile-nav-actions .button:hover {
+  transform: none;
 }
 
 @media (min-width: 981px) {
@@ -1944,5 +2028,103 @@ textarea:focus-visible {
     flex-direction: row;
     align-items: center;
     gap: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   Mobile layout pass
+   Small-screen corrections shared across every page that uses this sheet.
+   ========================================================================== */
+
+/* A text link sitting in a button row shouldn't carry its standalone top
+   margin — it pushed "Explore our programs" / "Learn more" off-centre. */
+.button-row .text-link {
+  margin-top: 0;
+}
+
+/* "Learn more" in the Field Law vote section was charcoal on charcoal. */
+.fieldlaw-vote-section .text-link {
+  color: var(--color-paper);
+}
+
+/* Donation intro paragraph sat flush against its heading. */
+.donation-copy h2 + p {
+  margin-top: 1.25rem;
+}
+
+/* YouTube CTA sat flush against the paragraph above it. */
+.youtube-heading .button {
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 560px) {
+  /* Buttons in a row stack at one consistent, full content width instead of
+     wrapping at whatever width their label happens to be. */
+  .button-row {
+    gap: 1rem;
+  }
+
+  main .button,
+  .donation-action .button {
+    width: 100%;
+  }
+
+  .button-row .text-link {
+    margin-inline: auto;
+    padding-block: 0.25rem;
+  }
+
+  /* Cards were sized for desktop rows and left a tall empty band above
+     their copy once stacked in a single column. */
+  .pathway-card {
+    min-height: 0;
+  }
+
+  .pathway-number {
+    margin-bottom: 1.25rem;
+  }
+
+  .program-card {
+    min-height: 0;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .program-card .card-label {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Two-up stat grids: let an odd last tile span the row instead of
+     leaving a hole beside it. */
+  .market-stats,
+  .stat-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .market-stats article:last-child:nth-child(odd),
+  .stat-row article:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  /* Portraits at 4:5 and full width each ran ~440px tall. */
+  .team-photo-wrap {
+    aspect-ratio: 1 / 1;
+  }
+
+  .team-photo {
+    object-position: center 20%;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Footer link lists in two columns rather than one long single file. */
+  .footer-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem 1.5rem;
+  }
+
+  .footer-links a[href^="mailto:"] {
+    grid-column: 1 / -1;
   }
 }

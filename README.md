@@ -182,8 +182,16 @@ host's root at this folder and set `index.html` as the default document.
 Verified at 375px (mobile), 768px (tablet), 1024px, and 1440px (desktop):
 
 - No horizontal overflow at any width.
-- Mobile nav (`<details>`) opens/closes correctly and exposes all 8 links
-  (Home, SPARKS, Team, Watch, Resources, Partner, Forum, Member sign-in).
+- Mobile nav (`<details>`) opens a full-width, centred panel under the
+  header with links grouped into accordion dropdowns — Home, Explore
+  (Programs, Watch, Resources), SPARKS (Information, Storyteller Quiz,
+  Apply as a Mentee, Become a Mentor, Mentee Portal), About (Team & Staff,
+  Partnership) — plus Member sign-in and Donate buttons. The group holding
+  the current page starts open and the page link is marked `aria-current`.
+  Groups are nested `<details>`, so the menu works without JavaScript;
+  `main.js` only adds one-group-open-at-a-time behaviour.
+- Below 560px, content buttons span the full content width so stacked CTAs
+  line up; stat grids let an odd last tile span the row.
 - Desktop nav appears at ≥981px per the original breakpoint.
 - Hero image, team photos and program/pathway cards reflow correctly at
   every tested width.

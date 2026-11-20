@@ -22,6 +22,18 @@
       mobileNav.removeAttribute("open");
     }
   });
+
+  // Link groups (Explore / SPARKS / About) act as an accordion: opening one
+  // closes the others so the panel stays short on small screens.
+  var groups = mobileNav.querySelectorAll(".mobile-nav-group");
+  groups.forEach(function (group) {
+    group.addEventListener("toggle", function () {
+      if (!group.open) return;
+      groups.forEach(function (other) {
+        if (other !== group) other.removeAttribute("open");
+      });
+    });
+  });
 })();
 
 // Desktop nav dropdowns (Team, SPARKS): toggle on click, close on outside
