@@ -1,0 +1,72 @@
+# Publishes the site to GitHub Pages:
+#   main    -> https://wearehomegrown.ca/
+#   staging -> https://wearehomegrown.ca/staging/  (noindex, no analytics)
+#
+# Every deploy rebuilds both from the tips of main and staging.
+# The deploy itself always runs from main so it passes the default
+# "github-pages" environment rule (default branch only); a push to
+# staging just asks main's copy of this workflow to run.
+#
+# Requires: Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+
+name: Deploy site
+
+on:
+  push:
+    branches: [main, staging]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  request-deploy:
+    if: github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Trigger deploy from main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: src-main
+
+      - name: Check out staging
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+          path: src-staging
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site/staging
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'README.md' src-main/ _site/
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'README.md' --exclude 'CNAME' src-staging/ _site/staging/
+          python3 src-main/.github/scripts/prepare_staging.py _site/staging
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
