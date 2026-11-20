@@ -1,0 +1,337 @@
+/* ==========================================================================
+   SPARKS page — HG 2026 campaign direction ("Halftone Dark")
+   Scoped to body.sparks so the shared site header/footer are untouched.
+   Palette: ink #141414 · coral #e87a6b · gold #fcbc2e · paper #faf9f6
+   Type: Poppins 800 display (uppercase) · Karla body/labels
+   ========================================================================== */
+
+body.sparks {
+  --sp-bg: #141414;
+  --sp-card: #1f2626;
+  --sp-line: #3d4a4a;
+  --sp-ink: #faf9f6;
+  --sp-body: #eef0f0;
+  --sp-mut: #9ba7a7;
+  --sp-coral: #e87a6b;
+  --sp-gold: #fcbc2e;
+  --sp-display: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  --sp-text: "Karla", "Helvetica Neue", Arial, sans-serif;
+  background: var(--sp-bg);
+  color: var(--sp-body);
+  font-family: var(--sp-text);
+}
+
+/* Halftone dot ground on every content section */
+.sparks main .section,
+.sparks main .page-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: var(--sp-bg);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1.3px, transparent 1.7px);
+  background-size: 9px 9px;
+  color: var(--sp-body);
+}
+
+.sparks main .section-soft {
+  background-color: #191e1e;
+}
+
+.sparks main .shell {
+  position: relative;
+  z-index: 1;
+}
+
+/* Starburst */
+.sp-burst {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  fill: var(--sp-coral);
+}
+
+.sp-burst.hero {
+  width: 760px;
+  height: 760px;
+  right: -240px;
+  top: -120px;
+  opacity: 0.26;
+}
+
+.sp-burst.cta {
+  width: 620px;
+  height: 620px;
+  left: -220px;
+  bottom: -260px;
+  opacity: 0.2;
+}
+
+/* Type */
+.sparks main h1,
+.sparks main h2,
+.sparks main h3 {
+  font-family: var(--sp-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--sp-ink);
+}
+
+.sparks main h2 {
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+}
+
+.sparks main h3 {
+  font-size: 1.3rem;
+}
+
+.sparks main p,
+.sparks main li {
+  font-family: var(--sp-text);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--sp-body);
+}
+
+.sparks .section-heading p {
+  font-size: 1.15rem;
+  max-width: 42rem;
+}
+
+.sparks .eyebrow,
+.sparks .card-label,
+.sparks .section-dark .eyebrow:not(.gold) {
+  font-family: var(--sp-text);
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.09em;
+  color: var(--sp-mut);
+}
+
+.sparks .eyebrow.gold {
+  color: var(--sp-gold);
+}
+
+/* Hero */
+.sparks .page-hero {
+  padding: clamp(4rem, 10vw, 8rem) 0 clamp(3rem, 6vw, 5rem);
+}
+
+.sparks .page-hero .sp-tagline {
+  font-family: var(--sp-display);
+  font-weight: 400;
+  font-size: clamp(0.95rem, 2vw, 1.3rem);
+  color: var(--sp-body);
+  margin: 0 0 0.5rem;
+}
+
+.sparks .page-hero h1 {
+  font-size: clamp(4.5rem, 19vw, 11.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--sp-coral);
+  max-width: none;
+  margin: 0;
+}
+
+.sparks .page-hero .lede {
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  color: var(--sp-body);
+  max-width: 40rem;
+  margin-top: 1.75rem;
+}
+
+/* Buttons: square, 2px, flat */
+.sparks .button {
+  border-radius: 0;
+  border-width: 2px;
+  font-family: var(--sp-display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.6rem;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.sparks .button-gold,
+.sparks .button-charcoal {
+  background: var(--sp-coral);
+  border-color: var(--sp-coral);
+  color: #141414;
+}
+
+.sparks .button-gold:hover,
+.sparks .button-charcoal:hover {
+  background: var(--sp-gold);
+  border-color: var(--sp-gold);
+}
+
+.sparks .button-outline {
+  background: transparent;
+  border-color: var(--sp-line);
+  color: var(--sp-ink);
+}
+
+.sparks .button-outline:hover {
+  border-color: var(--sp-coral);
+  color: var(--sp-coral);
+}
+
+.sparks a:focus-visible,
+.sparks summary:focus-visible,
+.sparks .button:focus-visible {
+  outline: 3px solid var(--sp-gold);
+  outline-offset: 3px;
+}
+
+.sparks .text-link,
+.sparks .text-link.light {
+  color: var(--sp-ink);
+  font-family: var(--sp-text);
+  font-weight: 700;
+  text-decoration-color: var(--sp-coral);
+}
+
+/* Stats */
+.sparks .stat-row article {
+  background: var(--sp-card);
+  border: 2px solid var(--sp-line);
+  border-radius: 0;
+}
+
+.sparks .stat-row strong {
+  font-family: var(--sp-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+  color: var(--sp-gold);
+  line-height: 1;
+}
+
+.sparks .stat-row span {
+  font-family: var(--sp-text);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.09em;
+  color: var(--sp-body);
+}
+
+.sparks .stat-note {
+  font-size: 0.95rem;
+  color: var(--sp-mut);
+}
+
+/* Cards */
+.sparks .step-card,
+.sparks .path-card,
+.sparks .partner-note {
+  background: var(--sp-card);
+  border: 2px solid var(--sp-line);
+  border-radius: 0;
+  color: var(--sp-body);
+}
+
+.sparks .step-card p,
+.sparks .path-card li {
+  font-size: 1.05rem;
+}
+
+.sparks .step-card .pathway-number,
+.sparks .pathway-number {
+  font-family: var(--sp-display);
+  font-weight: 800;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--sp-coral);
+}
+
+.sparks .path-card li::before {
+  border-radius: 0;
+  background: var(--sp-coral);
+}
+
+.sparks .path-card:hover,
+.sparks .step-card:hover {
+  border-color: var(--sp-coral);
+}
+
+.sparks .partner-note strong {
+  font-family: var(--sp-display);
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--sp-ink);
+}
+
+/* Timeline */
+.sparks .timeline-item {
+  border-bottom: 2px solid var(--sp-line);
+}
+
+.sparks .timeline-item .eyebrow {
+  color: var(--sp-gold);
+}
+
+.sparks .timeline-item h3 {
+  font-size: 1.35rem;
+}
+
+.sparks .timeline-item p {
+  font-size: 1.05rem;
+}
+
+/* FAQ */
+.sparks .faq-list details {
+  background: var(--sp-card);
+  border: 2px solid var(--sp-line);
+  border-radius: 0;
+  padding: 1.1rem 1.4rem;
+}
+
+.sparks .faq-list details[open] {
+  border-color: var(--sp-coral);
+}
+
+.sparks .faq-list summary {
+  font-family: var(--sp-display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--sp-ink);
+  min-height: 2.75rem;
+}
+
+.sparks .faq-list summary span {
+  color: var(--sp-coral);
+  font-size: 1.6rem;
+}
+
+.sparks .faq-list p {
+  font-size: 1.05rem;
+  color: #c9cfcf;
+}
+
+/* Final CTA */
+.sparks .final-cta h2 {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  color: var(--sp-coral);
+}
+
+@media (max-width: 640px) {
+  .sparks .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .sp-burst.hero {
+    width: 520px;
+    height: 520px;
+    right: -260px;
+    top: -80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sparks .button {
+    transition: none;
+  }
+}
