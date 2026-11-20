@@ -360,6 +360,10 @@ body.sparks {
 }
 
 /* FAQ */
+.sparks .faq-list {
+  max-width: none;
+}
+
 .sparks .faq-list details {
   background: var(--sp-card);
   border: 2px solid var(--sp-line);
