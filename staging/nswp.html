@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nomad Social Work Project | Homegrown Arts &amp; Media Collective</title>
+<meta name="description" content="The Nomad Social Work Project is Alberta's first embedded support program for the arts sector. Tell us what would actually help.">
+<!-- Staging page: keep out of search results until it goes live. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#2c3636">
+<link rel="icon" href="../assets/favicon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&amp;family=Karla:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --charcoal-900: #1f2626;
+  --charcoal-800: #2c3636;
+  --charcoal-700: #3d4a4a;
+  --teal-300: #c9cfcf;
+  --teal-200: #dde1e1;
+  --teal-100: #eef0f0;
+  --gold-700: #a8760d;
+  --gold-500: #fcbc2e;
+  --ink-on-gold: #2c2205;
+  --paper: #faf9f6;
+  --white: #ffffff;
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", system-ui, sans-serif;
+  --font-body: Karla, "Helvetica Neue", system-ui, sans-serif;
+  --shell: 1200px;
+  --gutter: 5%;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition-duration: 0.01ms !important; }
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--charcoal-700);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--charcoal-900); }
+a:hover { color: var(--gold-700); }
+a:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--gold-500);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+h1, h2, h3 { margin: 0; font-family: var(--font-display); color: var(--charcoal-900); }
+p { margin: 0; }
+
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 10;
+  padding: 10px 16px; border-radius: 999px;
+  background: var(--gold-500); color: var(--ink-on-gold); font-weight: 700; text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+
+.shell { max-width: var(--shell); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+
+.eyebrow {
+  font-weight: 700; font-size: 15px; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--gold-700);
+}
+.eyebrow.on-dark { color: var(--teal-300); }
+
+.hl {
+  background: var(--gold-500); color: var(--ink-on-gold);
+  padding: 0 0.14em; border-radius: 8px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+
+.display {
+  font-weight: 800; line-height: 1.08; letter-spacing: -0.02em;
+  font-size: clamp(34px, 5vw, 48px);
+}
+
+.button {
+  display: inline-flex; align-items: center; gap: 12px;
+  min-height: 52px; padding: 14px 30px; border-radius: 999px;
+  font-weight: 700; font-size: 18px; text-decoration: none;
+  transition: background-color 140ms cubic-bezier(.2,.7,.3,1), color 140ms cubic-bezier(.2,.7,.3,1);
+}
+.button-gold { background: var(--gold-500); color: var(--ink-on-gold); }
+.button-gold:hover { background: #fdcf66; color: var(--ink-on-gold); }
+.button-outline { border: 2px solid var(--charcoal-900); color: var(--charcoal-900); }
+.button-outline:hover { background: var(--charcoal-900); color: var(--paper); }
+
+/* Decorative corner shapes on dark sections */
+.dark-section { position: relative; overflow: hidden; background: var(--charcoal-800); }
+.blob { position: absolute; pointer-events: none; }
+.blob-tl { left: 0; top: 0; width: min(640px, 80vw); height: auto; }
+.blob-br { right: 0; bottom: 0; width: min(380px, 50vw); height: auto; }
+.dark-section > .shell { position: relative; }
+
+/* ---- Global header ---- */
+.site-header { background: var(--paper); border-bottom: 1px solid var(--teal-200); }
+.site-header .shell {
+  padding-top: 18px; padding-bottom: 18px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+}
+.site-header .brand img { height: 40px; width: auto; }
+.main-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-weight: 500; font-size: 16px; }
+.main-nav a { text-decoration: none; }
+.main-nav a[aria-current] { font-weight: 700; border-bottom: 3px solid var(--gold-500); padding-bottom: 4px; }
+
+/* ---- Section sub-nav ---- */
+.subnav { background: var(--charcoal-800); border-bottom: 1px solid var(--charcoal-700); position: sticky; top: 0; z-index: 5; }
+.subnav .shell {
+  padding-top: 12px; padding-bottom: 12px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+}
+.crumbs { font-size: 14px; color: var(--teal-300); }
+.crumbs a { color: var(--teal-300); }
+.crumbs a:hover { color: var(--gold-500); }
+.crumbs strong { color: var(--paper); }
+.subnav nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 15px; font-weight: 700; }
+.subnav nav a { color: var(--paper); text-decoration: none; }
+.subnav nav a:hover { color: var(--gold-500); }
+section[id] { scroll-margin-top: 64px; }
+
+/* ---- Hero ---- */
+.hero .shell {
+  padding-top: clamp(72px, 9vw, 128px); padding-bottom: clamp(64px, 8vw, 112px);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 56px;
+}
+.hero-copy { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+.hero .eyebrow { font-size: 16px; }
+.hero h1 {
+  font-weight: 800; font-size: clamp(42px, 6.5vw, 72px); line-height: 1.06; letter-spacing: -0.025em;
+  color: var(--paper);
+}
+.hero-lede { max-width: 620px; font-size: clamp(19px, 2vw, 22px); line-height: 1.5; color: var(--teal-200); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 16px; padding-top: 8px; }
+.crisis-note { font-size: 15px; color: var(--teal-300); }
+.crisis-note strong { color: var(--paper); }
+.hero-badge { flex: 1 1 280px; display: flex; justify-content: center; }
+.hero-badge img { width: 300px; height: 300px; object-fit: contain; }
+
+/* ---- About ---- */
+.about .shell { padding-top: clamp(64px, 8vw, 96px); padding-bottom: clamp(64px, 8vw, 96px); }
+.about-copy { max-width: 720px; display: flex; flex-direction: column; gap: 20px; }
+.about-copy .lead { font-size: 20px; }
+
+/* ---- How we work ---- */
+.how { background: var(--teal-100); }
+.how .shell {
+  padding-top: clamp(64px, 8vw, 96px); padding-bottom: clamp(64px, 8vw, 96px);
+  display: flex; flex-direction: column; gap: 40px;
+}
+.section-head { display: flex; flex-direction: column; gap: 14px; max-width: 720px; }
+.section-head .lead { font-size: 20px; }
+.cards { display: flex; flex-wrap: wrap; gap: 24px; }
+.card {
+  flex: 1 1 300px; background: var(--white); border: 1px solid var(--teal-200); border-radius: 18px;
+  padding: 32px; display: flex; flex-direction: column; gap: 14px;
+  box-shadow: 0 2px 8px rgba(44, 54, 54, 0.06);
+}
+.card-num {
+  width: 52px; height: 52px; border-radius: 999px; background: var(--charcoal-800); color: var(--paper);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 800; font-size: 24px;
+}
+.card h3 { font-weight: 700; font-size: 28px; }
+
+/* ---- Take part ---- */
+.take-part .shell {
+  padding-top: clamp(88px, 9vw, 120px); padding-bottom: clamp(64px, 8vw, 96px);
+  display: flex; flex-direction: column; gap: 40px;
+}
+.take-part .section-head { max-width: 760px; }
+.take-part h2 { font-weight: 800; font-size: clamp(38px, 5.5vw, 56px); line-height: 1.06; letter-spacing: -0.02em; color: var(--paper); }
+.take-part .lead { color: var(--teal-200); }
+.options { display: flex; flex-wrap: wrap; gap: 24px; }
+.option {
+  flex: 1 1 420px; background: var(--paper); border-radius: 18px;
+  padding: clamp(28px, 4vw, 40px); display: flex; flex-direction: column; gap: 18px;
+}
+.option-tag { display: flex; align-items: center; gap: 12px; color: var(--gold-700); }
+.option-tag span { font-weight: 700; font-size: 14px; letter-spacing: 0.09em; text-transform: uppercase; }
+.option h3 { font-weight: 800; font-size: clamp(27px, 3.4vw, 34px); line-height: 1.1; }
+.option ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.option .button-row { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 6px; }
+
+/* ---- FAQ ---- */
+.faq .shell {
+  padding-top: clamp(64px, 8vw, 96px); padding-bottom: clamp(64px, 8vw, 96px);
+  display: flex; flex-wrap: wrap; gap: 56px;
+}
+.faq-head { flex: 1 1 300px; display: flex; flex-direction: column; gap: 14px; }
+.faq-head h2 { font-size: clamp(34px, 4.6vw, 44px); }
+.faq-list { flex: 999 1 520px; min-width: 0; border-top: 1px solid var(--teal-300); }
+.faq-list details { border-bottom: 1px solid var(--teal-300); }
+.faq-list summary {
+  cursor: pointer; list-style: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 22px 0; min-height: 44px;
+  font-family: var(--font-display); font-weight: 700; font-size: clamp(19px, 2.2vw, 22px); color: var(--charcoal-900);
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary:hover { color: var(--gold-700); }
+.faq-plus { flex: none; transition: transform 140ms cubic-bezier(.2,.7,.3,1); }
+.faq-list details[open] .faq-plus { transform: rotate(45deg); }
+.faq-list details p { margin: 0 0 22px; }
+
+/* ---- Support band ---- */
+.support { border-top: 1px solid var(--teal-200); }
+.support .shell {
+  padding-top: 56px; padding-bottom: 56px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 32px;
+}
+.support-copy { flex: 1 1 420px; display: flex; flex-direction: column; gap: 8px; }
+.support-copy h2 { font-weight: 800; font-size: 32px; line-height: 1.1; }
+.support-copy strong { color: var(--charcoal-900); }
+
+/* ---- Footer ---- */
+.site-footer { background: var(--charcoal-800); color: var(--teal-300); }
+.site-footer .shell { padding-top: 64px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 40px; }
+.footer-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; }
+.footer-logos .hg-logo { height: 48px; width: auto; }
+.footer-logos .badge { width: 96px; height: 96px; }
+.footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;
+  border-top: 1px solid var(--charcoal-700); padding-top: 24px; font-size: 14px;
+}
+.footer-bottom a { color: var(--teal-300); }
+.footer-bottom a:hover { color: var(--gold-500); }
+
+@media (max-width: 640px) {
+  .subnav { position: static; }
+  .hero-badge img { width: 220px; height: 220px; }
+  .card { padding: 26px; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header">
+  <div class="shell">
+    <a class="brand" href="../"><img src="../assets/homegrown-logo-transparent.png" alt="Homegrown Arts &amp; Media Collective, home" width="420" height="160"></a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="../">About</a>
+      <a href="../#programs" aria-current="page">Programs</a>
+      <a href="../annual-general-meeting">Events</a>
+      <a href="../sponsor">Get involved</a>
+      <a href="mailto:community@wearehomegrown.ca">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="subnav">
+  <div class="shell">
+    <div class="crumbs"><a href="../#programs">Programs</a> <span aria-hidden="true">/</span> <strong>Nomad Social Work Project</strong></div>
+    <nav aria-label="NSWP section">
+      <a href="#about">About</a>
+      <a href="#how">How we work</a>
+      <a href="#take-part">Take part</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</div>
+
+<main id="main-content">
+
+  <!-- Hero -->
+  <section class="hero dark-section" id="top">
+    <svg class="blob blob-tl" aria-hidden="true" width="640" height="200" viewBox="0 0 640 200"><path d="M0 0 H640 C560 150 410 215 250 190 C130 171 50 130 0 95 Z" fill="#3d4a4a"></path></svg>
+    <svg class="blob blob-br" aria-hidden="true" width="380" height="260" viewBox="700 1090 380 260"><path d="M1080 1350 V1090 C990 1075 880 1115 800 1215 C765 1260 735 1310 705 1350 Z" fill="#3d4a4a"></path></svg>
+    <div class="shell">
+      <div class="hero-copy">
+        <p class="eyebrow on-dark">Nomad Social Work Project</p>
+        <h1>The <span class="hl">first</span> project of its kind in Alberta.</h1>
+        <p class="hero-lede">Alberta's first embedded support program for the arts sector. Wellness that shows up where artists already work.</p>
+        <div class="hero-actions">
+          <a class="button button-gold" href="#take-part">Take the survey<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        </div>
+        <p class="crisis-note">In distress right now? Call or text <strong>9-8-8</strong>, the Suicide Crisis Helpline.</p>
+      </div>
+      <div class="hero-badge">
+        <img src="../assets/nswp-badge.png" alt="The Nomad Social Work Project badge" width="452" height="452" fetchpriority="high">
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="shell">
+      <div class="about-copy">
+        <p class="eyebrow">What NSWP is</p>
+        <h2 class="display">Built by the sector, <span class="hl">for the sector.</span></h2>
+        <p class="lead">An embedded social worker who shows up where artists and arts workers already are: studios, rehearsals, festivals and offices. No referral, no waitlist, no need to be in crisis.</p>
+        <p>Right now we're listening. Before anything is built, artists and arts workers across Alberta tell us what would actually help.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="how" id="how">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow">How we work</p>
+        <h2 class="display">Low-barrier. <span class="hl">Trauma-informed.</span> Decolonized.</h2>
+        <p class="lead">That's how NSWP is being built. Tell us what would make it work for you.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="card-num" aria-hidden="true">1</div>
+          <h3>Low-barrier</h3>
+          <p>No referral, no paperwork to get started. Support comes to where you already work.</p>
+        </article>
+        <article class="card">
+          <div class="card-num" aria-hidden="true">2</div>
+          <h3>Trauma-informed</h3>
+          <p>You set the pace and decide what you share. Safety is non-negotiable.</p>
+        </article>
+        <article class="card">
+          <div class="card-num" aria-hidden="true">3</div>
+          <h3>Decolonized</h3>
+          <!-- TODO: description copy for "Decolonized" was left blank in the mockup. -->
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Take part -->
+  <section class="take-part dark-section" id="take-part">
+    <svg class="blob blob-tl" aria-hidden="true" width="640" height="200" viewBox="0 0 640 200"><path d="M0 0 H640 C560 150 410 215 250 190 C130 171 50 130 0 95 Z" fill="#3d4a4a"></path></svg>
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow on-dark">Take part</p>
+        <h2>Your answers <span class="hl">decide</span> what gets built.</h2>
+        <p class="lead">Two ways to have your say. Pick whichever feels right.</p>
+      </div>
+      <div class="options">
+        <article class="option">
+          <div class="option-tag"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg><span>Survey</span></div>
+          <h3>10 minutes. Anonymous. What would actually help?</h3>
+          <ul>
+            <li>For Alberta artists and arts workers, including administrators</li>
+            <li>Answers are shared as a group. No one is quoted.</li>
+            <li>Available in English and French</li>
+          </ul>
+          <div class="button-row">
+            <!-- TODO: replace with the live survey URL. -->
+            <a class="button button-gold" href="#take-part">Take the survey<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="shell">
+      <div class="faq-head">
+        <p class="eyebrow">Questions</p>
+        <h2 class="display">Good questions to ask.</h2>
+        <p>Something we didn't cover? <a href="mailto:community@wearehomegrown.ca">Contact us</a>.</p>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Is it confidential?<svg class="faq-plus" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></summary>
+          <p>Yes. The survey is anonymous, answers are shared as a group, and no one is quoted.</p>
+        </details>
+        <details>
+          <summary>I don't have time.<svg class="faq-plus" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></summary>
+          <p>It takes about 10 minutes. Or book a one-on-one instead and talk it through.</p>
+        </details>
+        <details>
+          <summary>Surveys change nothing.<svg class="faq-plus" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></summary>
+          <p>This one comes first. Your answers shape the program before it exists.</p>
+        </details>
+        <details>
+          <summary>I'm not in crisis. Is this for me?<svg class="faq-plus" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></summary>
+          <p>Yes. You don't have to be struggling to have a say.</p>
+        </details>
+        <details>
+          <summary>I'm an arts administrator. Does this include me?<svg class="faq-plus" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></summary>
+          <p>Yes. You hold the sector together, and you're allowed to need support too.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support band -->
+  <section class="support" aria-labelledby="support-title">
+    <div class="shell">
+      <div class="support-copy">
+        <h2 id="support-title">In distress right now?</h2>
+        <p>NSWP isn't a crisis service. If you need help now, call or text <strong>9-8-8</strong>, the Suicide Crisis Helpline, any time. In an emergency, call 9-1-1.</p>
+      </div>
+      <a class="button button-outline" href="tel:988"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>Call or text 9-8-8</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-logos">
+      <a href="../"><img class="hg-logo" src="../assets/homegrown-logo-white.png" alt="Homegrown Arts &amp; Media Collective, home" width="450" height="160"></a>
+      <img class="badge" src="../assets/nswp-badge.png" alt="The Nomad Social Work Project badge" width="452" height="452" loading="lazy">
+    </div>
+    <div class="footer-bottom">
+      <span><a href="mailto:community@wearehomegrown.ca">Contact</a></span>
+      <span>Homegrown Arts &amp; Media Collective &middot; Calgary, Alberta</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
