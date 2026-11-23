@@ -107,7 +107,7 @@
   .share-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
   .share-row a,.share-row button{display:flex;align-items:center;justify-content:center;min-height:46px;background:var(--card);border:2px solid var(--line);color:var(--ink);font:700 14px 'Karla';text-decoration:none;border-radius:var(--r-sm);cursor:pointer;padding:6px}
   .share-row a:hover,.share-row button:hover{border-color:var(--acc);color:var(--acc)}
-  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--acc2);color:var(--on-acc);font:800 14px 'Poppins';padding:12px 22px;border-radius:var(--pill);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--acc2);color:var(--on-acc);font:800 14px 'Poppins';padding:12px 22px;border-radius:var(--pill);z-index:60;max-width:calc(100% - 32px);width:max-content;text-align:center;opacity:0;pointer-events:none;transition:opacity .25s}
   .toast.on{opacity:1}
   button:focus-visible,a:focus-visible{outline:3px solid var(--acc2);outline-offset:3px}
   @media (prefers-reduced-motion:reduce){.screen{animation:none}.bar i{transition:none}.btn,.opt{transition:none}}
@@ -481,7 +481,7 @@
         toast("Pick Instagram, then Stories");
         navigator.share({files:[story.file]})
           .catch(function(e){if(!e||e.name!=="AbortError")save(story,"Story image saved. Add it to your Instagram Story")});
-      }else save(story,"Story image saved. Add it to your Instagram Story from your phone");
+      }else save(story,"Story image saved. Post it from your phone");
     };
   }
 
