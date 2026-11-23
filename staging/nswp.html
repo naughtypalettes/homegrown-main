@@ -102,19 +102,75 @@ p { margin: 0; }
 .blob-br { right: 0; bottom: 0; width: min(380px, 50vw); height: auto; }
 .dark-section > .shell { position: relative; }
 
-/* ---- Global header ---- */
-.site-header { background: var(--paper); border-bottom: 1px solid var(--teal-200); }
-.site-header .shell {
-  padding-top: 18px; padding-bottom: 18px;
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+/* ---- Global site header (mirrors css/styles.css, scoped so it doesn't
+   collide with this page's own .shell / .button / .brand styles) ---- */
+.hg-top {
+  --hg-charcoal-deep: #344141; --hg-gold: #fcbc2e; --hg-green: #2d6a4f;
+  --hg-paper: #ffffff; --hg-ink: #253030; --hg-soft: #e9e9e9;
+  font-family: "Avenir Next", "Century Gothic", Arial, sans-serif;
+  color: var(--hg-ink); line-height: 1.5; font-size: 16px;
+  display: contents;
 }
-.site-header .brand img { height: 40px; width: auto; }
-.main-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-weight: 500; font-size: 16px; }
-.main-nav a { text-decoration: none; }
-.main-nav a[aria-current] { font-weight: 700; border-bottom: 3px solid var(--gold-500); padding-bottom: 4px; }
+.hg-top a { color: inherit; }
+.hg-top a:hover { color: inherit; }
+.hg-top .shell { width: min(calc(100% - 2.5rem), 78rem); max-width: none; margin-inline: auto; padding: 0; }
+.hg-top .funding-strip { background: var(--hg-gold); color: var(--hg-charcoal-deep); font-size: 0.875rem; font-weight: 750; }
+.hg-top .funding-strip-inner { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 2.65rem; flex-wrap: wrap; padding-block: 0.35rem; }
+.hg-top .funding-strip-inner a { display: inline-flex; align-items: center; gap: 0.3rem; text-decoration: underline; text-underline-offset: 0.2rem; white-space: nowrap; }
+.hg-top .site-header { background: var(--hg-paper); border-bottom: 1px solid rgba(52, 65, 65, 0.16); position: sticky; top: 0; z-index: 50; }
+.hg-top .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.6rem; }
+.hg-top .brand { display: block; width: 11rem; height: auto; padding-block: 0.55rem; overflow: hidden; }
+.hg-top .brand img { width: 100%; height: auto; }
+.hg-top .button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
+  min-height: 2.75rem; padding: 0.65rem 1rem; font-size: 0.9rem;
+  border-radius: 999px; border: 2px solid transparent; font-weight: 850; line-height: 1.2;
+  text-decoration: none; transition: transform 0.16s ease; cursor: pointer;
+}
+.hg-top .button:hover { transform: translateY(-2px); }
+.hg-top .button-gold, .hg-top .button-gold:hover { background: var(--hg-gold); color: var(--hg-charcoal-deep); }
+.hg-top .button-green, .hg-top .button-green:hover { background: var(--hg-green); color: var(--hg-paper); }
+.hg-top .desktop-nav { display: none; align-items: center; gap: clamp(1rem, 2.4vw, 2rem); }
+.hg-top .desktop-nav a:not(.button) { text-decoration: none; font-weight: 750; font-size: 0.95rem; }
+.hg-top .desktop-nav a:not(.button):hover,
+.hg-top .desktop-nav a[aria-current] { text-decoration: underline; text-underline-offset: 0.3rem; }
+.hg-top .nav-dropdown { position: relative; }
+.hg-top .nav-dropdown-toggle { display: inline-flex; align-items: center; gap: 0.35rem; background: none; border: none; padding: 0; cursor: pointer; font: inherit; font-weight: 750; font-size: 0.95rem; color: inherit; }
+.hg-top .nav-dropdown-toggle svg { transition: transform 0.16s ease; }
+.hg-top .nav-dropdown.open .nav-dropdown-toggle svg { transform: rotate(180deg); }
+.hg-top .nav-dropdown-menu {
+  position: absolute; top: calc(100% + 0.7rem); left: 50%; transform: translateX(-50%);
+  min-width: 13rem; background: var(--hg-paper); border: 2px solid var(--hg-charcoal-deep);
+  box-shadow: 0.4rem 0.4rem 0 var(--hg-gold); border-radius: 14px; padding: 0.5rem;
+  display: none; flex-direction: column; z-index: 60;
+}
+.hg-top .nav-dropdown.open .nav-dropdown-menu { display: flex; }
+.hg-top .nav-dropdown-menu a { padding: 0.6rem 0.75rem; font-weight: 750; font-size: 0.92rem; text-decoration: none; border-radius: 10px; }
+.hg-top .nav-dropdown-menu a:hover { background: var(--hg-soft); }
+.hg-top .mobile-nav { position: relative; }
+.hg-top .mobile-nav summary { display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid var(--hg-charcoal-deep); border-radius: 10px; padding: 0.5rem; list-style: none; }
+.hg-top .mobile-nav summary::-webkit-details-marker, .hg-top .mobile-nav summary::marker { display: none; content: ""; }
+.hg-top .mobile-nav[open] summary svg { transform: rotate(90deg); }
+.hg-top .mobile-nav nav {
+  position: absolute; top: calc(100% + 0.6rem); right: 0; width: 15rem;
+  max-height: calc(100vh - 9rem); overflow-y: auto;
+  background: var(--hg-paper); border: 2px solid var(--hg-charcoal-deep); border-radius: 14px;
+  box-shadow: 0.5rem 0.5rem 0 var(--hg-gold); padding: 0.75rem; display: flex; flex-direction: column;
+}
+.hg-top .mobile-nav nav a { padding: 0.8rem; font-weight: 800; text-decoration: none; }
+.hg-top .mobile-nav nav a:hover { background: var(--hg-soft); border-radius: 10px; }
+@media (min-width: 981px) {
+  .hg-top .desktop-nav { display: flex; }
+  .hg-top .mobile-nav { display: none; }
+  .hg-top .brand { width: 14rem; }
+}
+@media (max-width: 759px) {
+  .hg-top .funding-strip-inner { align-items: flex-start; flex-direction: column; gap: 0.15rem; padding-block: 0.55rem; }
+  .hg-top .funding-strip-inner a { white-space: normal; }
+}
 
 /* ---- Section sub-nav ---- */
-.subnav { background: var(--charcoal-800); border-bottom: 1px solid var(--charcoal-700); position: sticky; top: 0; z-index: 5; }
+.subnav { background: var(--charcoal-800); border-bottom: 1px solid var(--charcoal-700); }
 .subnav .shell {
   padding-top: 12px; padding-bottom: 12px;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
@@ -126,7 +182,7 @@ p { margin: 0; }
 .subnav nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 15px; font-weight: 700; }
 .subnav nav a { color: var(--paper); text-decoration: none; }
 .subnav nav a:hover { color: var(--gold-500); }
-section[id] { scroll-margin-top: 64px; }
+section[id] { scroll-margin-top: 96px; }
 
 /* ---- Hero ---- */
 .hero .shell {
@@ -236,7 +292,6 @@ section[id] { scroll-margin-top: 64px; }
 .footer-bottom a:hover { color: var(--gold-500); }
 
 @media (max-width: 640px) {
-  .subnav { position: static; }
   .hero-badge img { width: 220px; height: 220px; }
   .card { padding: 26px; }
 }
@@ -245,18 +300,69 @@ section[id] { scroll-margin-top: 64px; }
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
+<div class="hg-top">
+<div class="funding-strip">
+  <div class="shell funding-strip-inner">
+    <span>SPARKS 2027 is Open!</span>
+    <a href="/sparks">Learn more about SPARKS
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+    </a>
+  </div>
+</div>
+
 <header class="site-header">
-  <div class="shell">
-    <a class="brand" href="../"><img src="../assets/homegrown-logo-transparent.png" alt="Homegrown Arts &amp; Media Collective, home" width="420" height="160"></a>
-    <nav class="main-nav" aria-label="Main">
-      <a href="../">About</a>
-      <a href="../#programs" aria-current="page">Programs</a>
-      <a href="../annual-general-meeting">Events</a>
-      <a href="../sponsor">Get involved</a>
-      <a href="mailto:community@wearehomegrown.ca">Contact</a>
+  <div class="shell header-inner">
+    <a href="../" class="brand" aria-label="Homegrown Arts and Media Collective home">
+      <img src="../assets/homegrown-logo.png" alt="Homegrown Arts and Media Collective" width="450" height="160">
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="../">Home</a>
+      <a href="../resources" class="button button-green button-small">Resources</a>
+      <a href="../#programs">Programs</a>
+      <a href="../#watch">Watch</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Team <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="../#team">Staff</a>
+        </div>
+      </div>
+      <a href="../sponsor">Partnership</a>
+      <a href="nswp" aria-current="page">NSWP</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">SPARKS <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="../sparks">Information</a>
+          <a href="../sparks-quiz">Storyteller Quiz</a>
+          <a href="../sparks-application-mentee" target="_blank" rel="noreferrer">Apply as a Mentee</a>
+          <a href="../sparks-application-mentor" target="_blank" rel="noreferrer">Become a Mentor</a>
+          <a href="../login">Mentee Portal</a>
+        </div>
+      </div>
+      <a href="../#donate" class="button button-gold button-small">Donate</a>
     </nav>
+    <details class="mobile-nav">
+      <summary aria-label="Open navigation">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+      </summary>
+      <nav aria-label="Mobile navigation">
+        <a href="../">Home</a>
+        <a href="../resources">Resources</a>
+        <a href="../#programs">Programs</a>
+        <a href="../#watch">Watch</a>
+        <a href="../#team">Team &middot; Staff</a>
+        <a href="../sponsor">Partnership</a>
+        <a href="nswp" aria-current="page">Nomad Social Work Project</a>
+        <a href="../sparks">SPARKS &middot; Information</a>
+        <a href="../sparks-quiz">SPARKS &middot; Storyteller Quiz</a>
+        <a href="../sparks-application-mentee" target="_blank" rel="noreferrer">SPARKS &middot; Apply as a Mentee</a>
+        <a href="../sparks-application-mentor" target="_blank" rel="noreferrer">SPARKS &middot; Become a Mentor</a>
+        <a href="../login">SPARKS &middot; Mentee Portal</a>
+        <a href="../login">Member sign-in</a>
+      </nav>
+    </details>
   </div>
 </header>
+</div>
 
 <div class="subnav">
   <div class="shell">
@@ -348,7 +454,6 @@ section[id] { scroll-margin-top: 64px; }
           <ul>
             <li>For Alberta artists and arts workers, including administrators</li>
             <li>Answers are shared as a group. No one is quoted.</li>
-            <li>Available in English and French</li>
           </ul>
           <div class="button-row">
             <a class="button button-gold" href="https://claude.ai/artifact/3Bj5psiF4g2t6nPfcZ1cAS" target="_blank" rel="noopener">Take the survey<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
@@ -416,5 +521,6 @@ section[id] { scroll-margin-top: 64px; }
     </div>
   </div>
 </footer>
+<script src="../js/main.js" defer></script>
 </body>
 </html>
