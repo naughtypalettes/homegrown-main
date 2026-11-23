@@ -80,9 +80,12 @@ program card — measures **5.5:1**; every other pairing exceeds 6:1.
 Everything in `assets/` is local and optimized; nothing hotlinks the
 original site or third-party image hosts:
 
-- `homegrown-logo.png`, `homegrown-logo-white.png` — from the handoff
-  package, downsized from 4667×1667 to 900px wide and re-compressed
-  (730KB → 66KB and 47KB → 31KB).
+- `homegrown-logo.svg`, `homegrown-logo-white.svg` — vector paths exported
+  from the original Illustrator file (`Homegrown_AMC_Logo_Grey.ai`), grey
+  `#536567` and white. Used everywhere the logo appears on the site.
+- `homegrown-logo.png`, `homegrown-logo-white.png` — 1800×643 raster renders
+  of the same artwork, for places that need a bitmap (e.g. the SPARKS quiz
+  share-card canvas).
 - `homegrown-creator-studio.jpg` — hero photo from the handoff package,
   converted from a 2MB PNG to an optimized JPEG (~193KB) since it's a
   photograph, not a graphic needing transparency.
