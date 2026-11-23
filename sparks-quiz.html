@@ -105,6 +105,7 @@
   </div>
   <div class="stage" id="stage"></div>
 </div>
+<div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"><label>Website <input type="text" id="hp" name="website" tabindex="-1" autocomplete="off"></label></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -247,6 +248,7 @@
     if(sent)return; sent=true;
     payload.submitted_at=new Date().toISOString();
     payload.tokens_json=JSON.stringify(payload.tokens);
+    var hp=document.getElementById("hp"); payload.website=hp?hp.value:"";
     try{console.log("SPARKS response",JSON.stringify(payload))}catch(e){}
     if(!ENDPOINT)return;
     try{
