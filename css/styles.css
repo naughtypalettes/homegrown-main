@@ -449,6 +449,7 @@ textarea:focus-visible {
   width: 15rem;
   background: var(--color-paper);
   border: 2px solid var(--color-charcoal-deep);
+  border-radius: var(--radius);
   box-shadow: 0.5rem 0.5rem 0 var(--color-gold);
   padding: 0.75rem;
   display: flex;
@@ -762,7 +763,7 @@ textarea:focus-visible {
 .team-card {
   background: var(--color-soft);
   border-bottom: 0.5rem solid var(--color-gold);
-  border-radius: var(--radius) var(--radius) 0 0;
+  border-radius: var(--radius);
   overflow: hidden;
 }
 
@@ -787,6 +788,7 @@ textarea:focus-visible {
   min-width: 3.5rem;
   padding: 0.75rem;
   background: var(--color-gold);
+  border-top-left-radius: var(--radius);
   color: var(--color-charcoal-deep);
   text-align: center;
   font-size: 1.1rem;
@@ -1628,6 +1630,8 @@ textarea:focus-visible {
   width: min(100%, 30rem);
   justify-self: center;
   border: 2px solid var(--color-gold);
+  border-radius: var(--radius);
+  overflow: hidden;
   box-shadow: 1rem 1rem 0 rgba(252, 188, 46, 0.18);
   transform: rotate(1.2deg);
 }
