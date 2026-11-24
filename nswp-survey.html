@@ -28,7 +28,7 @@
 <title>NSWP Survey | Homegrown Arts &amp; Media Collective</title>
 <meta name="theme-color" content="#2c3636">
 <link rel="icon" href="assets/favicon.jpg">
-<meta name="description" content="A short, anonymous survey to help shape the Nomad Social Work Project, mental health support built for Alberta's arts sector.">
+<meta name="description" content="A short survey to help shape the Nomad Social Work Project, mental health support built for Alberta's arts sector.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -120,6 +120,19 @@
   .help p{font-size:14px;line-height:1.45;color:var(--mut);max-width:34ch}
   .help b{color:var(--ink)}
   .help img{width:132px;height:auto;flex:none;opacity:.95}
+  .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .scale button{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;min-height:52px;font:700 18px var(--display);cursor:pointer}
+  .scale button:hover{border-color:var(--mut)}
+  .scale button[aria-checked="true"]{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+  .scale-ends{display:flex;justify-content:space-between;font-size:14px;color:var(--mut);margin-top:8px}
+  @media (min-width:521px){.scale{grid-template-columns:repeat(10,1fr);gap:6px}}
+  .contact{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:18px;margin-top:22px}
+  .contact label{display:block;font:700 14px var(--text);color:var(--ink);margin:12px 0 6px}
+  .contact input{width:100%;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;min-height:48px;font:16px var(--text);color:var(--ink)}
+  .contact input:focus{border-color:var(--gold);outline:none;box-shadow:0 0 0 3px rgba(252,188,46,.45)}
+  .contact .btn{margin-top:14px}
+  .contact .err{color:var(--gold);font-size:14.5px;min-height:1em;margin-top:8px}
+  .contact .err:empty{display:none}
   .sr{position:absolute;left:-9999px}
   h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none}
   @media (max-width:520px){.help{padding-right:min(30vw,128px);padding-bottom:6px}.help img{display:none}}
@@ -141,30 +154,58 @@
 
 <script>
 (function(){
-  // Paste your Google Apps Script Web App URL here (see apps-script.gs). Leave empty to disable saving.
+  // Paste your Google Apps Script Web App URL here (see nswp-apps-script.gs). Leave empty to disable saving.
   var ENDPOINT="https://script.google.com/macros/s/AKfycbxLAMS7jUkahQIjKBloi7a_0Qnh1mBy0uiw8kgAIMnqk3JLFVbsIjrRro4JnmZCMDkP/exec";
   var PROGRAM_FORM="https://forms.gle/gr8NCKwA4mzma2Qk9";
   // Paste the "Book a one-on-one" link used in the campaign creative. Leave empty to hide that button.
   var BOOKING="";
   var ARROW='<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 
-  var ROLES=["Independent artist","Arts administrator","Emerging artist or student","Other arts worker"];
   var DISC=["Film / video","Animation","Media arts","Music / audio","Visual art","Writing","Performance","Something else"];
   var REGION=["Calgary area","Edmonton area","Red Deer / Central Alberta","Another city or town","Rural or remote","Outside Alberta"];
-  var IDS=["Indigenous","Francophone","Living with a disability","2SLGBTQ+"];
-  var LOAD=[["income","Unpredictable income"],["deadlines","Grant and project deadlines"],["isolation","Working alone or feeling isolated"],["burnout","Burnout or running on empty"],["benefits","No benefits or safety net"],["block","Creative blocks or self-doubt"],["critique","Pressure from audiences or critique"]];
+  var IDS=["Indigenous","Francophone","Living with a disability","Deaf or hard of hearing","2SLGBTQ+","Racialized person","Newcomer / immigrant"];
   var HISTORY=["Yes, and it helped","Yes, but it wasn't a good fit","I wanted to but didn't","I haven't needed it"];
   var BARRIERS=["Cost","Long wait times","Providers who don't understand creative work","Not knowing where to start","Stigma","Not feeling culturally safe","Language","Distance or transportation","Irregular schedule","Worry about privacy"];
-  var FEATS=[["dropin","Drop-in community hours"],["oneonone","One-on-one sessions with a social worker"],["workshops","Wellness workshops"],["training","Certified training (like Mental Health First Aid)"],["peers","Peer circles, in person or online"],["guide","A guide to services that understand arts work"]];
   var PAIRS=[["place","In person","Online"],["time","Daytime","Evening"],["group","In a group","One-on-one"]];
   var SAFE=["Fully confidential","Non-clinical, plain language","Someone who understands arts work","Culturally safe and Indigenous-informed","2SLGBTQ+ affirming","Available in French","Accessible formats","Free or low cost","Flexible, last-minute scheduling"];
+  var ORGSIZE=["2–5 staff","6–10 staff","11–25 staff","25+ staff","Volunteer operated"];
+  var YEARS=["Less than 2 years","2–5 years","6–10 years","11–20 years","More than 20 years"];
 
-  var STEPS=["intro","about","where","load","barriers","build","format","safe","note","review","thanks"];
-  var N=STEPS.length-2; // counted steps: about..review = 8
-  var st={roles:[],disc:[],region:"",ids:[],load:{},history:"",barriers:[],tokens:{},fmt:{},safe:[],note:""};
-  var i=0, sent=false;
+  // Two streams, built the same way. Artists keep the original questions;
+  // arts administrators get their own roles, load, supports and a 1–10 benefit scale.
+  var STREAMS={
+    artist:{
+      label:"artist",
+      roles:["Independent artist","Emerging artist or student","Other arts worker"],
+      discQ:"What do you work in?",
+      load:[["income","Unpredictable income"],["deadlines","Grant and project deadlines"],["isolation","Working alone or feeling isolated"],["burnout","Burnout or running on empty"],["benefits","No benefits or safety net"],["block","Creative blocks or self-doubt"],["critique","Pressure from audiences or critique"]],
+      historyQ:'Have you ever looked for <mark class="paper">support</mark>?',
+      buildQ:'You have 5 tokens. What should NSWP <mark>include</mark>?',
+      feats:[["dropin","Drop-in community hours"],["oneonone","One-on-one sessions with a social worker"],["workshops","Wellness workshops"],["training","Certified training (like Mental Health First Aid)"],["peers","Peer circles, in person or online"],["guide","A guide to services that understand arts work"]],
+      steps:["intro","about","where","load","barriers","build","format","safe","note","review","thanks"]
+    },
+    admin:{
+      label:"arts administrator",
+      roles:["Executive director","Programming coordinator / director","Production / technical coordinator","Communications / marketing coordinator","Membership coordinator","Grant coordination","Volunteer coordinator","Artist support staff"],
+      discQ:"What does your organization work in?",
+      load:[["workload","Excessive workload or capacity limitations"],["crisis","Supporting artists in crisis"],["burnout","Burnout or running on empty"],["training","Feeling unprepared or lacking training"],["scope","Artist needs outside the scope of your role"],["sustain","Organizational sustainability"],["funding","Funding instability"]],
+      historyQ:'Have you accessed training or <mark class="paper">support</mark> from outside your organization?',
+      buildQ:'As an arts administrator, what supports would help you <mark>support and sustain</mark> your work?',
+      feats:[["asist","Suicide awareness and intervention skills training (ASIST)"],["mhfa","Mental Health First Aid"],["peers","Peer support groups"],["coaching","Leadership coaching"],["counselling","Mental health counselling"],["crisis","Crisis response training"],["burnout","Burnout prevention training"],["rsw","Consultations with a registered social worker"],["wellness","Wellness planning"],["navigation","Resource navigation support"]],
+      steps:["intro","about","org","where","load","barriers","build","format","safe","benefit","note","review","thanks"]
+    }
+  };
+
+  var S=null, STEPS=["intro"], N=0;
+  var st={roles:[],disc:[],orgSize:"",years:"",region:"",ids:[],load:{},history:"",barriers:[],tokens:{},fmt:{},safe:[],benefit:"",note:""};
+  var i=0, sent=false, contactSent=false;
   var stage=document.getElementById("stage"),prog=document.getElementById("prog"),
       back=document.getElementById("back"),stepTxt=document.getElementById("stepTxt");
+
+  function setStream(k){
+    if(S&&S!==STREAMS[k]){st.roles=[];st.load={};st.tokens={}} // these lists differ between streams
+    S=STREAMS[k];S.key=k;STEPS=S.steps;N=STEPS.length-2;
+  }
 
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
   function has(a,v){return a.indexOf(v)>-1}
@@ -182,6 +223,20 @@
       b.setAttribute("aria-pressed",has(arr,b.getAttribute("data-v")));
     });
   }
+  function radios(list,key,label){
+    return '<div class="opts" role="radiogroup" aria-label="'+esc(label)+'" data-radio="'+key+'">'+list.map(function(v){
+      return '<button type="button" class="opt" role="radio" aria-checked="'+(st[key]===v)+'" data-v="'+esc(v)+'">'+esc(v)+'</button>'}).join("")+'</div>';
+  }
+  function bindRadios(){
+    var groups=stage.querySelectorAll("[data-radio]");
+    for(var g=0;g<groups.length;g++)(function(el){
+      el.onclick=function(e){
+        var b=e.target.closest("[role=radio]");if(!b)return;
+        st[el.getAttribute("data-radio")]=b.getAttribute("data-v");
+        var all=el.querySelectorAll("[role=radio]");for(var k=0;k<all.length;k++)all[k].setAttribute("aria-checked",all[k]===b);
+      };
+    })(groups[g]);
+  }
   function frame(kicker,title,hint,body,nextLabel){
     return '<div class="screen"><div class="kicker">'+kicker+'</div><h2>'+title+'</h2>'+(hint?'<p class="hint">'+hint+'</p>':'')+body+
       '<div class="actions"><button class="btn" id="next" type="button">'+(nextLabel||"Next")+ARROW+'</button><button class="skip" id="skip" type="button">Skip this one</button></div></div>';
@@ -195,7 +250,7 @@
   function go(n){
     i=n; render();
     var k=Math.max(0,Math.min(i,N+1));
-    prog.style.width=(k/(N+1)*100)+"%";
+    prog.style.width=(N?(k/(N+1)*100):0)+"%";
     stepTxt.textContent=(i>=1&&i<=N)?("Step "+i+" of "+N):"";
     back.hidden=(i===0||i===STEPS.length-1);
     window.scrollTo(0,0);
@@ -210,57 +265,54 @@
         '<div class="kicker">Tell us what you need</div>'+
         '<h1>Your answers <mark>decide</mark> what gets built.</h1>'+
         '<p class="sub">The Nomad Social Work Project is a new support program being built for Alberta\'s arts sector. This is how artists and arts workers shape it, before anything is built.</p>'+
-        '<ul class="promise"><li>Anonymous. No name, no email.</li><li>Skip any question you don\'t want to answer.</li><li>About 5 minutes, and it works on your phone.</li></ul>'+
-        '<div class="actions" style="margin-top:0"><button class="btn gold" id="start" type="button">Take the survey'+ARROW+'</button>'+
-        (BOOKING?'<a class="btn" href="'+BOOKING+'" target="_blank" rel="noopener">Book a one-on-one'+ARROW+'</a>':'')+'</div>'+
+        '<ul class="promise"><li>Skip any question you don\'t want to answer.</li><li>About 5 minutes, and it works on your phone.</li></ul>'+
+        '<h3 style="margin-top:0">Which survey fits you?</h3>'+
+        '<div class="opts"><button class="btn gold block" type="button" data-stream="artist">I\'m an artist'+ARROW+'</button>'+
+        '<button class="btn block" type="button" data-stream="admin">I\'m an arts administrator'+ARROW+'</button></div>'+
+        (BOOKING?'<div class="actions"><a class="btn" href="'+BOOKING+'" target="_blank" rel="noopener">Book a one-on-one'+ARROW+'</a></div>':'')+
         '<p class="note">This is a survey, not a counselling service. If you\'re in distress right now, the numbers at the bottom of the page are there 24/7.</p></div>';
-      document.getElementById("start").onclick=function(){go(1)};
+      stage.querySelector(".opts").onclick=function(e){
+        var b=e.target.closest("[data-stream]");if(!b)return;
+        setStream(b.getAttribute("data-stream"));go(1);
+      };
       return;
     }
     if(s==="about"){
       stage.innerHTML=frame("About you","Which of these sound <mark>like you</mark>?","Pick any that fit.",
-        chips(ROLES,st.roles,"roles")+'<h3>What do you work in?</h3>'+chips(DISC,st.disc,"disc"));
+        chips(S.roles,st.roles,"roles")+'<h3>'+S.discQ+'</h3>'+chips(DISC,st.disc,"disc"));
       bindChips("roles",st.roles);bindChips("disc",st.disc);wire();return;
     }
+    if(s==="org"){
+      stage.innerHTML=frame("Your organization","Tell us about your <mark class=\"paper\">organization</mark>.","",
+        '<h3 style="margin-top:0">Organization size</h3>'+radios(ORGSIZE,"orgSize","Organization size")+
+        '<h3>How long have you worked in the arts sector?</h3>'+radios(YEARS,"years","Length of time working in the sector"));
+      bindRadios();wire();return;
+    }
     if(s==="where"){
-      var ro='<div class="opts" role="radiogroup" aria-label="Region">'+REGION.map(function(v){
-        return '<button type="button" class="opt" role="radio" aria-checked="'+(st.region===v)+'" data-v="'+esc(v)+'">'+esc(v)+'</button>'}).join("")+'</div>';
-      stage.innerHTML=frame("Where you are","Where are you <mark class=\"paper\">based</mark>?","",ro+
+      stage.innerHTML=frame("Where you are","Where are you <mark class=\"paper\">based</mark>?","",radios(REGION,"region","Region")+
         '<h3>Optional: do any of these describe you?</h3>'+chips(IDS,st.ids,"ids")+
         '<p class="note">Only used to check whether we\'re hearing from a wide range of voices. Never reported individually.</p>');
-      stage.querySelector(".opts").onclick=function(e){
-        var b=e.target.closest(".opt");if(!b)return;
-        st.region=b.getAttribute("data-v");
-        var all=stage.querySelectorAll(".opt");for(var k=0;k<all.length;k++)all[k].setAttribute("aria-checked",all[k]===b);
-      };
-      bindChips("ids",st.ids);wire();return;
+      bindRadios();bindChips("ids",st.ids);wire();return;
     }
     if(s==="load"){
       var h="";
-      LOAD.forEach(function(r){
+      S.load.forEach(function(r){
         var v=st.load[r[0]];
         h+='<div class="row" role="radiogroup" aria-label="'+esc(r[1])+'"><div class="lbl">'+esc(r[1])+'</div><div class="seg">'+
           [["0","Not much"],["1","Some"],["2","A lot"]].map(function(o){
             return '<button type="button" role="radio" data-k="'+r[0]+'" data-v="'+o[0]+'" aria-checked="'+(String(v)===o[0])+'">'+o[1]+'</button>'}).join("")+'</div></div>';
       });
       stage.innerHTML=frame("Your load","What\'s the <mark>weather</mark> been like lately?","Tap how much each of these has weighed on you recently. There are no right answers.",h);
-      stage.addEventListener("click",loadHandler);
+      stage.querySelector(".screen").addEventListener("click",loadHandler);
       wire();return;
     }
     if(s==="barriers"){
-      var hs='<div class="opts" role="radiogroup" aria-label="Looked for support before">'+HISTORY.map(function(v){
-        return '<button type="button" class="opt" role="radio" aria-checked="'+(st.history===v)+'" data-v="'+esc(v)+'">'+esc(v)+'</button>'}).join("")+'</div>';
-      stage.innerHTML=frame("Getting support","Have you ever looked for <mark class=\"paper\">support</mark>?","",hs+
+      stage.innerHTML=frame("Getting support",S.historyQ,"",radios(HISTORY,"history","Looked for support before")+
         '<h3>What tends to get in the way? Pick any.</h3>'+chips(BARRIERS,st.barriers,"barriers"));
-      stage.querySelector(".opts").onclick=function(e){
-        var b=e.target.closest(".opt");if(!b)return;
-        st.history=b.getAttribute("data-v");
-        var all=stage.querySelectorAll(".opt");for(var k=0;k<all.length;k++)all[k].setAttribute("aria-checked",all[k]===b);
-      };
-      bindChips("barriers",st.barriers);wire();return;
+      bindRadios();bindChips("barriers",st.barriers);wire();return;
     }
     if(s==="build"){
-      stage.innerHTML=frame("Build the program","You have 5 tokens. What should NSWP <mark>include</mark>?","Add tokens to what matters most. You don\'t have to spend them all.",
+      stage.innerHTML=frame("Build the program",S.buildQ,"You have 5 tokens. Add them to what matters most. You don\'t have to spend them all.",
         '<div class="pool" id="pool"></div><div id="tl"></div>');
       drawTokens();wire();return;
     }
@@ -271,15 +323,23 @@
           [p[1],p[2]].map(function(l){return '<button type="button" class="opt" role="radio" data-k="'+p[0]+'" data-v="'+esc(l)+'" aria-checked="'+(st.fmt[p[0]]===l)+'">'+esc(l)+'</button>'}).join("")+'</div>';
       });
       stage.innerHTML=frame("This or that","What would you <mark>actually</mark> show up for?","Three quick ones.",ph);
-      stage.addEventListener("click",pairHandler);
+      stage.querySelector(".screen").addEventListener("click",pairHandler);
       wire();return;
     }
     if(s==="safe"){
       stage.innerHTML=frame("Feeling safe","What would help you feel <mark class=\"paper\">safe</mark>?","Pick any.",chips(SAFE,st.safe,"safe"));
       bindChips("safe",st.safe);wire();return;
     }
+    if(s==="benefit"){
+      var nums=[];for(var k=1;k<=10;k++)nums.push(String(k));
+      stage.innerHTML=frame("How much it would help","How <mark>beneficial</mark> would access to this support be for you and your team?","On a scale of 1 to 10, where 1 is not at all and 10 is extremely.",
+        '<div class="scale" role="radiogroup" aria-label="Benefit, 1 to 10" data-radio="benefit">'+nums.map(function(v){
+          return '<button type="button" role="radio" aria-checked="'+(st.benefit===v)+'" data-v="'+v+'">'+v+'</button>'}).join("")+'</div>'+
+        '<div class="scale-ends" aria-hidden="true"><span>Not at all</span><span>Extremely</span></div>');
+      bindRadios();wire();return;
+    }
     if(s==="note"){
-      stage.innerHTML=frame("Last thing","Anything you want the team to <mark>know</mark>?","Optional. Please don\'t include your name or contact details.",
+      stage.innerHTML=frame("Almost done","Anything you want the team to <mark>know</mark>?","Optional. Please don\'t include your name or contact details here. You can leave those at the end if you\'d like to stay connected.",
         '<label class="sr" for="nt">Your note</label><textarea id="nt" maxlength="1200" placeholder="What would make support feel possible for you?">'+esc(st.note)+'</textarea>'+
         '<p class="note">Notes are read in batches, not in real time. If you need support now, call or text 9-8-8.</p>',"Review");
       var t=document.getElementById("nt");t.oninput=function(){st.note=t.value};wire();return;
@@ -289,13 +349,13 @@
   }
 
   function loadHandler(e){
-    var b=e.target.closest(".seg button");if(!b||i!==3)return;
+    var b=e.target.closest(".seg button");if(!b||STEPS[i]!=="load")return;
     var k=b.getAttribute("data-k"),v=parseInt(b.getAttribute("data-v"),10);
     st.load[k]=v;
     var sibs=b.parentNode.children;for(var j=0;j<sibs.length;j++)sibs[j].setAttribute("aria-checked",sibs[j]===b);
   }
   function pairHandler(e){
-    var b=e.target.closest(".pair .opt");if(!b||i!==6)return;
+    var b=e.target.closest(".pair .opt");if(!b||STEPS[i]!=="format")return;
     st.fmt[b.getAttribute("data-k")]=b.getAttribute("data-v");
     var sibs=b.parentNode.children;for(var j=0;j<sibs.length;j++)sibs[j].setAttribute("aria-checked",sibs[j]===b);
   }
@@ -306,7 +366,7 @@
     for(var k=0;k<5;k++)p+='<i class="'+(k<left?"":"off")+'"></i>';
     document.getElementById("pool").innerHTML=p+'<span style="margin-left:4px">'+left+' left</span>';
     var h="";
-    FEATS.forEach(function(f){
+    S.feats.forEach(function(f){
       var n=st.tokens[f[0]]||0,d="";for(var k=0;k<n;k++)d+="<i></i>";
       h+='<div class="tok"><div class="l">'+esc(f[1])+'</div><button type="button" data-k="'+f[0]+'" data-d="-1" aria-label="Remove a token from '+esc(f[1])+'">−</button><div class="dots" aria-label="'+n+' tokens">'+d+'</div><button type="button" data-k="'+f[0]+'" data-d="1" aria-label="Add a token to '+esc(f[1])+'">+</button></div>';
     });
@@ -320,17 +380,19 @@
   }
 
   function heavyList(){
-    var out=[];LOAD.forEach(function(r){if(st.load[r[0]]===2)out.push(r[1])});return out;
+    var out=[];S.load.forEach(function(r){if(st.load[r[0]]===2)out.push(r[1])});return out;
   }
 
   function renderReview(){
     var parts=[];
     if(st.roles.length)parts.push(["You",st.roles.join(", ")]);
+    if(st.orgSize)parts.push(["Organization",st.orgSize]);
     if(st.region)parts.push(["Region",st.region]);
-    var top=FEATS.filter(function(f){return (st.tokens[f[0]]||0)>0}).sort(function(a,b){return st.tokens[b[0]]-st.tokens[a[0]]}).slice(0,3).map(function(f){return f[1]});
+    var top=S.feats.filter(function(f){return (st.tokens[f[0]]||0)>0}).sort(function(a,b){return st.tokens[b[0]]-st.tokens[a[0]]}).slice(0,3).map(function(f){return f[1]});
     if(top.length)parts.push(["You backed",top.join(" · ")]);
     if(st.barriers.length)parts.push(["Barriers",st.barriers.length+" selected"]);
     if(st.safe.length)parts.push(["Feeling safe",st.safe.length+" selected"]);
+    if(st.benefit)parts.push(["Benefit",st.benefit+" out of 10"]);
     var sum=parts.length?parts.map(function(p){return '<div class="sum"><b>'+esc(p[0])+'</b>'+esc(p[1])+'</div>'}).join(""):'<div class="sum">You skipped everything. That\'s okay. You can still send, or go back and answer a few.</div>';
     stage.innerHTML='<div class="screen"><div class="kicker">Ready when you are</div><h2>Here\'s what you\'re <mark>sending</mark>.</h2>'+
       '<p class="hint">Nothing is sent until you tap the button. Answers are anonymous.</p>'+sum+
@@ -342,10 +404,14 @@
   function submit(){
     if(sent)return;sent=true;
     var d=new Date(),day=d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);
-    var p={submitted_date:day,roles:st.roles,disciplines:st.disc,region:st.region,identities:st.ids,
+    var p={stream:S.key,submitted_date:day,roles:st.roles,disciplines:st.disc,region:st.region,identities:st.ids,
       load:st.load,support_history:st.history,barriers:st.barriers,tokens:st.tokens,
       format:st.fmt,safety:st.safe,note:st.note};
+    if(S.key==="admin"){p.org_size=st.orgSize;p.years_in_sector=st.years;p.benefit=st.benefit}
     try{console.log("NSWP response",JSON.stringify(p))}catch(e){}
+    post(p);
+  }
+  function post(p){
     if(!ENDPOINT)return;
     try{fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(p)}).catch(function(){})}catch(e){}
   }
@@ -358,11 +424,30 @@
       '<div class="opts" style="margin-top:6px">'+
       (BOOKING?'<a class="btn gold block" href="'+BOOKING+'" target="_blank" rel="noopener">Book a one-on-one'+ARROW+'</a>':'')+
       '<a class="btn block" href="'+PROGRAM_FORM+'" target="_blank" rel="noopener">Interested in using NSWP? Tell us here'+ARROW+'</a>'+
-      '</div><p class="note">That form is separate from this survey, so your answers here stay anonymous.</p>'+
+      '</div><p class="note">That form is separate from this survey.</p>'+
+      '<div class="contact" id="contact"><h3 style="margin-top:0">Stay connected (optional)</h3>'+
+      '<p class="hint">Homegrown is committed to maintaining the privacy of each individual who completes our surveys and connects with us. In January we will be hosting community chats to discuss these topics further. If you would like to be involved, please leave your name and email.</p>'+
+      '<form id="cf" novalidate><label for="cn">Name</label><input id="cn" name="name" autocomplete="name" maxlength="120">'+
+      '<label for="ce">Email</label><input id="ce" name="email" type="email" autocomplete="email" maxlength="200" required>'+
+      '<p class="err" id="cerr" role="alert"></p>'+
+      '<button class="btn gold" type="submit">Keep me posted'+ARROW+'</button></form>'+
+      '<p class="note">Saved separately from your survey answers, so they can\'t be matched up.</p></div>'+
       '<p class="note">Know someone in the arts who should weigh in? Send them this page.</p></div>';
+    var f=document.getElementById("cf");
+    document.getElementById("ce").oninput=function(){document.getElementById("cerr").textContent=""};
+    f.onsubmit=function(e){
+      e.preventDefault();
+      var nm=document.getElementById("cn").value.trim(),em=document.getElementById("ce").value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){document.getElementById("cerr").textContent="Please enter a valid email address.";document.getElementById("ce").focus();return}
+      if(contactSent)return;contactSent=true;
+      post({type:"contact",stream:S.key,name:nm,email:em});
+      document.getElementById("contact").innerHTML='<h3 style="margin-top:0">Stay connected</h3><p class="hint" tabindex="-1" id="cok">Thank you. We\'ll be in touch about the January community chats.</p>';
+      try{document.getElementById("cok").focus()}catch(e){}
+    };
   }
 
-  go(0);
+  var want=(location.search.match(/[?&]for=(artist|admin)\b/)||[])[1];
+  if(want){setStream(want);go(1)}else go(0);
 })();
 </script>
 </body>
