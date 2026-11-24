@@ -12,8 +12,8 @@
    IDEA: the campaign carousel, continued. Each question is the next slide; a coral starburst marks progress
    PICTURE: the halftone dark ground and coral starburst from the campaign boards, with the progress star moving along a rule
    COLOUR and TYPE: #141414 halftone, white ink, coral #e87a6b lead, gold #fcbc2e support; Poppins 800 caps headlines, Karla labels and body
-   LAYOUT: one question per screen, square-edged blocks, solid coral callouts, review before send */
-:root{color-scheme:dark;--bg:#141414;--card:#1c1c1c;--card2:#232323;--ink:#fff;--soft:#c9cfcf;--mut:#9ba7a7;--line:#353535;--acc:#e87a6b;--gold:#fcbc2e;--err:#ff9d8f}
+   LAYOUT: one question per screen, rounded blocks, solid coral callouts, review before send */
+:root{color-scheme:dark;--bg:#141414;--card:#1c1c1c;--card2:#232323;--ink:#fff;--soft:#c9cfcf;--mut:#9ba7a7;--line:#353535;--acc:#e87a6b;--gold:#fcbc2e;--err:#ff9d8f;--r:14px;--r-sm:10px;--pill:999px}
 *{box-sizing:border-box;min-width:0}
 html,body{margin:0;min-height:100%}
 body{background:var(--bg) radial-gradient(circle,rgba(255,255,255,.08) 1.3px,transparent 1.7px) 0 0/9px 9px fixed;color:var(--ink);font:17px/1.55 Karla,'Helvetica Neue',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
@@ -29,8 +29,8 @@ header.top{position:sticky;top:0;z-index:20;background:linear-gradient(var(--bg)
 .brand{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
 .brand img{height:30px;width:auto;display:block}
 .fuse{position:relative;height:22px}
-.fuse .rail{position:absolute;left:0;right:0;top:10px;height:2px;background:var(--line)}
-.fuse .burn{position:absolute;left:0;top:9px;height:4px;background:var(--acc);transition:width .5s ease}
+.fuse .rail{position:absolute;left:0;right:0;top:10px;height:2px;background:var(--line);border-radius:var(--pill)}
+.fuse .burn{position:absolute;left:0;top:9px;height:4px;background:var(--acc);border-radius:var(--pill);transition:width .5s ease}
 .fuse .ember{position:absolute;top:0;width:22px;height:22px;margin-left:-11px;fill:var(--acc);transition:left .5s ease}
 .chaps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:6px}
 .chaps span{font:700 13px Karla,'Helvetica Neue',Arial,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#6f7878}
@@ -46,20 +46,20 @@ main{position:relative;z-index:1;padding:14px 0 130px}
 label.f{display:grid;gap:8px;font-weight:700}
 label.f small{color:var(--mut);font-weight:400}
 .req{color:var(--acc)}
-input[type=text],input[type=email],input[type=tel],input[type=url],textarea{width:100%;font:17px/1.5 Karla,sans-serif;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:0;padding:14px 16px;outline:none;transition:border-color .2s}
+input[type=text],input[type=email],input[type=tel],input[type=url],textarea{width:100%;font:17px/1.5 Karla,sans-serif;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:var(--r-sm);padding:14px 16px;outline:none;transition:border-color .2s}
 textarea{min-height:150px;resize:vertical}
 input:focus,textarea:focus{border-color:var(--acc)}
 input::placeholder,textarea::placeholder{color:#6f7878}
 .bad{border-color:var(--err)!important}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font:700 15px Karla,sans-serif;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:0;padding:10px 16px;min-height:44px;cursor:pointer;transition:all .15s}
+.chip{font:700 15px Karla,sans-serif;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:var(--pill);padding:10px 16px;min-height:44px;cursor:pointer;transition:all .15s}
 .chip:hover{border-color:#5a5a5a}
 .chip.on,.chip.have{border-color:var(--acc);color:var(--acc);background:rgba(232,122,107,.1)}
 .chip.star{background:var(--acc);border-color:var(--acc);color:#141414}
 .chip.need{border-color:var(--gold);color:var(--gold);background:rgba(252,188,46,.08)}
 .cards{display:grid;gap:12px;margin-top:30px}
 .cards.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-.card{text-align:left;font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:0;padding:20px 22px;cursor:pointer;min-height:64px;transition:all .15s}
+.card{text-align:left;font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:20px 22px;cursor:pointer;min-height:64px;transition:all .15s}
 .card:hover{border-color:#5a5a5a;background:var(--card2)}
 .card b{display:block;font:800 22px/1.1 Poppins,sans-serif;letter-spacing:-.02em;text-transform:uppercase}
 .card span{display:block;color:var(--soft);font-size:16px;margin-top:6px}
@@ -68,11 +68,11 @@ input::placeholder,textarea::placeholder{color:#6f7878}
 .track{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:36px}
 .track::before{content:"";position:absolute;left:10%;right:10%;top:15px;height:2px;background:var(--line)}
 .stop{position:relative;background:none;border:0;color:var(--soft);font:700 15px/1.3 Karla,'Helvetica Neue',Arial,sans-serif;cursor:pointer;display:grid;justify-items:center;gap:10px;padding:0 2px;min-height:44px;text-align:center}
-.stop i{width:32px;height:32px;background:var(--card);border:2px solid var(--line);transition:all .2s;transform:rotate(45deg) scale(.75)}
+.stop i{width:32px;height:32px;background:var(--card);border:2px solid var(--line);border-radius:6px;transition:all .2s;transform:rotate(45deg) scale(.75)}
 .stop.on{color:var(--acc)}.stop.on i{background:var(--acc);border-color:var(--acc)}
 .stop.past i{border-color:var(--acc);background:#3a211d}
 .grid{display:grid;gap:10px;margin-top:28px}
-.row{display:grid;grid-template-columns:104px minmax(0,1fr);gap:10px;align-items:center;background:var(--card);border:2px solid var(--line);padding:10px 12px}
+.row{display:grid;grid-template-columns:104px minmax(0,1fr);gap:10px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:var(--r-sm);padding:10px 12px}
 .row.bad{border-color:var(--err)}
 .row b{font:800 15px Poppins,'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:-.01em}
 .row .chips{gap:6px}.row .chip{padding:8px 12px;font-size:14px;min-height:40px}
@@ -82,7 +82,7 @@ input::placeholder,textarea::placeholder{color:#6f7878}
 .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 nav.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:linear-gradient(rgba(20,20,20,0),var(--bg) 38%);padding:30px 0 18px}
 nav.bar .wrap{display:flex;gap:12px;align-items:center}
-.btn{font:800 17px Poppins,sans-serif;text-transform:uppercase;letter-spacing:-.01em;border:2px solid var(--acc);border-radius:0;padding:14px 28px;min-height:54px;cursor:pointer;background:var(--acc);color:#141414;transition:transform .15s,background .2s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn{font:800 17px Poppins,sans-serif;text-transform:uppercase;letter-spacing:-.01em;border:2px solid var(--acc);border-radius:var(--pill);padding:14px 28px;min-height:54px;cursor:pointer;background:var(--acc);color:#141414;transition:transform .15s,background .2s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
 .btn:hover{background:#f08e80}
 .btn:active{transform:translateY(1px)}
 .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
@@ -98,7 +98,7 @@ nav.bar .wrap{display:flex;gap:12px;align-items:center}
 .word{font:800 clamp(78px,20vw,168px)/.9 Poppins,sans-serif;letter-spacing:-.04em;color:var(--acc);margin:clamp(56px,10vh,110px) 0 0;text-transform:uppercase;font-size:min(168px,23.5cqi);white-space:nowrap}
 .kick{margin-top:clamp(40px,8vh,80px)}
 .lede{font:400 clamp(20px,3vw,26px)/1.35 Poppins,sans-serif;margin-top:16px;max-width:30ch}
-.callout{background:var(--acc);color:#141414;padding:24px 28px;margin-top:30px;font-weight:700;font-size:18px}
+.callout{background:var(--acc);color:#141414;border-radius:var(--r);padding:24px 28px;margin-top:30px;font-weight:700;font-size:18px}
 .callout p+p,.callout ul{margin-top:10px}
 .callout ul{padding-left:20px;margin-bottom:0}
 .callout li{margin:4px 0}

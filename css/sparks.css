@@ -16,6 +16,9 @@ body.sparks {
   --sp-gold: #fcbc2e;
   --sp-display: "Poppins", "Helvetica Neue", Arial, sans-serif;
   --sp-text: "Karla", "Helvetica Neue", Arial, sans-serif;
+  --sp-r: 14px;
+  --sp-r-sm: 10px;
+  --sp-pill: 999px;
   background: var(--sp-bg);
   color: var(--sp-body);
   font-family: var(--sp-text);
@@ -97,7 +100,7 @@ body.sparks {
 .sparks .mobile-nav nav {
   background: var(--sp-card);
   border: 2px solid var(--sp-line);
-  border-radius: 0;
+  border-radius: var(--sp-r);
   box-shadow: 0.4rem 0.4rem 0 var(--sp-coral);
 }
 
@@ -105,19 +108,19 @@ body.sparks {
 .sparks .mobile-nav nav a {
   font-family: var(--sp-text);
   color: var(--sp-ink);
-  border-radius: 0;
+  border-radius: var(--sp-r-sm);
 }
 
 .sparks .nav-dropdown-menu a:hover,
 .sparks .mobile-nav nav a:hover {
   background: var(--sp-bg);
   color: var(--sp-coral);
-  border-radius: 0;
+  border-radius: var(--sp-r-sm);
 }
 
 .sparks .mobile-nav summary {
   border: 2px solid var(--sp-line);
-  border-radius: 0;
+  border-radius: var(--sp-r-sm);
   color: var(--sp-ink);
 }
 
@@ -221,9 +224,9 @@ body.sparks {
   margin-top: 1.75rem;
 }
 
-/* Buttons: square, 2px, flat */
+/* Buttons: pill, 2px, flat */
 .sparks .button {
-  border-radius: 0;
+  border-radius: var(--sp-pill);
   border-width: 2px;
   font-family: var(--sp-display);
   font-weight: 800;
@@ -277,7 +280,7 @@ body.sparks {
 .sparks .stat-row article {
   background: var(--sp-card);
   border: 2px solid var(--sp-line);
-  border-radius: 0;
+  border-radius: var(--sp-r);
 }
 
 .sparks .stat-row strong {
@@ -307,7 +310,7 @@ body.sparks {
 .sparks .partner-note {
   background: var(--sp-card);
   border: 2px solid var(--sp-line);
-  border-radius: 0;
+  border-radius: var(--sp-r);
   color: var(--sp-body);
 }
 
@@ -326,7 +329,7 @@ body.sparks {
 }
 
 .sparks .path-card li::before {
-  border-radius: 0;
+  border-radius: 50%;
   background: var(--sp-coral);
 }
 
@@ -367,7 +370,7 @@ body.sparks {
 .sparks .faq-list details {
   background: var(--sp-card);
   border: 2px solid var(--sp-line);
-  border-radius: 0;
+  border-radius: var(--sp-r);
   padding: 1.1rem 1.4rem;
 }
 

@@ -10,7 +10,15 @@
 <meta property="og:title" content="What kind of storyteller are you? | SPARKS">
 <meta property="og:description" content="Find your storytelling archetype and help shape SPARKS 2027, a mentorship program for emerging Alberta storytellers.">
 <meta property="og:site_name" content="Homegrown Arts &amp; Media Collective">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://wearehomegrown.ca/sparks-quiz">
+<meta property="og:image" content="https://wearehomegrown.ca/assets/sparks-quiz-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="What kind of storyteller are you? Take the SPARKS storyteller quiz.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What kind of storyteller are you? | SPARKS">
+<meta name="twitter:description" content="Find your storytelling archetype and help shape SPARKS 2027, a mentorship program for emerging Alberta storytellers.">
+<meta name="twitter:image" content="https://wearehomegrown.ca/assets/sparks-quiz-og.png">
 <link rel="icon" href="assets/favicon.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&amp;family=Poppins:wght@400;800&amp;display=swap" rel="stylesheet">
@@ -18,6 +26,7 @@
   :root{
     --bg:#141414; --ink:#faf9f6; --mut:#9ba7a7; --line:#3d4a4a;
     --acc:#e87a6b; --acc2:#fcbc2e; --card:#1f2626; --on-acc:#141414;
+    --r:14px; --r-sm:10px; --pill:999px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
@@ -31,8 +40,8 @@
   .app{position:relative;z-index:1;max-width:520px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;padding:20px 22px 32px}
   .top{display:flex;align-items:center;gap:14px;height:36px;margin-bottom:8px}
   .brand{font-family:'Poppins',sans-serif;font-weight:800;letter-spacing:.1em;font-size:14px;color:var(--acc)}
-  .bar{flex:1;height:8px;background:var(--line);overflow:hidden}
-  .bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .4s ease}
+  .bar{flex:1;height:8px;background:var(--line);overflow:hidden;border-radius:var(--pill)}
+  .bar i{display:block;height:100%;width:0;background:var(--acc);border-radius:var(--pill);transition:width .4s ease}
   .back{background:none;border:0;color:var(--mut);font:700 14px 'Karla';letter-spacing:.06em;cursor:pointer;padding:6px 0;min-width:44px;min-height:44px;text-align:right}
   .back:hover{color:var(--ink)}
   .back[hidden]{visibility:hidden;display:block}
@@ -49,7 +58,7 @@
   .hint{color:var(--mut);font-size:15px;margin-bottom:22px}
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    background:var(--acc);color:var(--on-acc);border:2px solid var(--acc);border-radius:0;
+    background:var(--acc);color:var(--on-acc);border:2px solid var(--acc);border-radius:var(--pill);
     font:800 16px 'Poppins',sans-serif;letter-spacing:.02em;padding:16px 28px;min-height:52px;cursor:pointer;text-decoration:none;
     transition:transform .15s ease, background .15s ease;
   }
@@ -59,11 +68,14 @@
   .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
   .btn.ghost:hover{border-color:var(--acc);color:var(--acc);background:transparent}
   .btn.block{width:100%}
+  .btn.ig{background:linear-gradient(45deg,#f9a03f,#e1306c 50%,#833ab4);border-color:transparent;color:#fff}
+  .btn.ig:hover{background:linear-gradient(45deg,#fbb45f,#e8457e 50%,#9450c4);border-color:transparent}
+  .btn.ig:disabled:hover{background:linear-gradient(45deg,#f9a03f,#e1306c 50%,#833ab4);border-color:transparent}
   .opts{display:grid;gap:10px}
   .opts.two{grid-template-columns:1fr 1fr}
   .opt{
     text-align:left;background:var(--card);border:2px solid var(--line);color:var(--ink);
-    border-radius:0;padding:17px 18px;font:400 17px/1.35 'Karla';cursor:pointer;
+    border-radius:var(--r);padding:17px 18px;font:400 17px/1.35 'Karla';cursor:pointer;
     transition:border-color .15s, transform .15s, background .15s;
   }
   .opt:hover{border-color:var(--acc);transform:translateX(3px)}
@@ -72,7 +84,7 @@
   .opt small{color:var(--mut);font-size:15px}
   .opts.two .opt{text-align:center;padding:30px 12px;font:800 19px 'Poppins'}
   .opts.two .opt:hover{transform:translateY(-3px)}
-  .tok{display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--line);padding:12px 14px}
+  .tok{display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:12px 14px}
   .tok .l{flex:1;font-weight:400;font-size:16px}
   .tok button{width:40px;height:40px;border-radius:50%;border:2px solid var(--line);background:none;color:var(--ink);font:700 18px 'Karla';cursor:pointer}
   .tok button:hover{border-color:var(--acc);color:var(--acc)}
@@ -85,11 +97,17 @@
   .result .tag{font:800 20px/1.3 'Poppins';margin-bottom:12px}
   .result p{color:#c9cfcf;line-height:1.55;font-size:17px;margin-bottom:12px}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 22px}
-  .chip{background:var(--card);border:2px solid var(--line);padding:8px 14px;font-size:14px;color:var(--ink)}
+  .chip{background:var(--card);border:2px solid var(--line);border-radius:var(--pill);padding:8px 16px;font-size:14px;color:var(--ink)}
   .chip span{color:var(--mut);margin-right:6px}
   .ctas{display:grid;gap:10px;margin-top:6px}
   .fine{color:var(--mut);font-size:14px;margin-top:18px;line-height:1.5;text-align:center}
-  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--acc2);color:var(--on-acc);font:800 14px 'Poppins';padding:12px 22px;z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
+  .share{margin:26px 0 6px;border-top:2px solid var(--line);padding-top:22px}
+  .share .kicker{margin-bottom:12px}
+  .share-card{display:block;width:100%;height:auto;aspect-ratio:4/5;background:var(--card);border:2px solid var(--line);border-radius:var(--r);margin-bottom:12px}
+  .share-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+  .share-row a,.share-row button{display:flex;align-items:center;justify-content:center;min-height:46px;background:var(--card);border:2px solid var(--line);color:var(--ink);font:700 14px 'Karla';text-decoration:none;border-radius:var(--r-sm);cursor:pointer;padding:6px}
+  .share-row a:hover,.share-row button:hover{border-color:var(--acc);color:var(--acc)}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--acc2);color:var(--on-acc);font:800 14px 'Poppins';padding:12px 22px;border-radius:var(--pill);z-index:60;max-width:calc(100% - 32px);width:max-content;text-align:center;opacity:0;pointer-events:none;transition:opacity .25s}
   .toast.on{opacity:1}
   button:focus-visible,a:focus-visible{outline:3px solid var(--acc2);outline-offset:3px}
   @media (prefers-reduced-motion:reduce){.screen{animation:none}.bar i{transition:none}.btn,.opt{transition:none}}
@@ -105,6 +123,7 @@
   </div>
   <div class="stage" id="stage"></div>
 </div>
+<div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"><label>Website <input type="text" id="hp" name="website" tabindex="-1" autocomplete="off"></label></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -179,7 +198,7 @@
   function render(){
     var s=STEPS[i], h="";
     if(s.id==="intro"){
-      h='<div class="screen"><img class="logo" src="assets/homegrown-logo-white.png" alt="Homegrown Arts &amp; Media Collective" width="450" height="160">'+
+      h='<div class="screen"><img class="logo" src="assets/homegrown-logo-white.svg" alt="Homegrown Arts &amp; Media Collective" width="450" height="160">'+
         '<div class="kicker">Alberta emerging storytellers</div>'+
         '<h1>What kind of <em>storyteller</em> are you?</h1>'+
         '<p class="sub">Nine quick taps. Find your storytelling archetype and help shape SPARKS, a project-based mentorship program built around what you actually need.</p>'+
@@ -247,6 +266,7 @@
     if(sent)return; sent=true;
     payload.submitted_at=new Date().toISOString();
     payload.tokens_json=JSON.stringify(payload.tokens);
+    var hp=document.getElementById("hp"); payload.website=hp?hp.value:"";
     try{console.log("SPARKS response",JSON.stringify(payload))}catch(e){}
     if(!ENDPOINT)return;
     try{
@@ -288,17 +308,183 @@
       '<div class="ctas">'+
         '<a class="btn block" href="'+MENTEE+'" target="_blank" rel="noopener">Apply as a mentee →</a>'+
         '<a class="btn ghost block" href="'+MENTOR+'" target="_blank" rel="noopener">I\'d rather mentor</a>'+
-        '<button class="btn ghost block" id="copy">Copy my result to share</button>'+
+      '</div>'+
+      '<div class="share"><div class="kicker">Share your result</div>'+
+        '<img class="share-card" id="card" alt="Your SPARKS storyteller result card: '+esc(a.name)+'. '+esc(a.tag)+'" width="1080" height="1350">'+
+        '<div class="ctas">'+
+          '<button class="btn block" id="shareimg" disabled>Share my result card</button>'+
+          '<button class="btn block ig" id="storyimg" disabled>Share to Instagram Story</button>'+
+          '<button class="btn ghost block" id="saveimg" disabled>Save image</button>'+
+        '</div>'+
+        '<div class="share-row">'+
+          '<a id="s-fb" target="_blank" rel="noopener">Facebook</a>'+
+          '<a id="s-x" target="_blank" rel="noopener">X</a>'+
+          '<a id="s-wa" target="_blank" rel="noopener">WhatsApp</a>'+
+          '<button id="copy">Copy text</button>'+
+        '</div>'+
       '</div>'+
       '<p class="fine">Thanks for helping shape SPARKS 2027. Know a storyteller who\'d get a different result? Send them the quiz.</p></div>';
     stage.innerHTML=h;
+    var t="I'm "+a.name+" 🔥 "+a.tag+" Find your storyteller type with SPARKS, a mentorship program for emerging Alberta storytellers.";
     document.getElementById("copy").onclick=function(){
-      var t="I'm "+a.name+" 🔥 "+a.tag+" Find your storyteller type with SPARKS, a mentorship program for emerging Alberta storytellers.";
       try{
-        navigator.clipboard.writeText(t).then(function(){toast("Copied!")},function(){toast("Couldn't copy, select and copy manually")});
+        navigator.clipboard.writeText(t+" "+QUIZ_URL).then(function(){toast("Copied!")},function(){toast("Couldn't copy, select and copy manually")});
       }catch(e){toast("Couldn't copy")}
     };
+    var u=encodeURIComponent(QUIZ_URL), et=encodeURIComponent(t);
+    document.getElementById("s-fb").href="https://www.facebook.com/sharer/sharer.php?u="+u;
+    document.getElementById("s-x").href="https://twitter.com/intent/tweet?text="+et+"&url="+u;
+    document.getElementById("s-wa").href="https://wa.me/?text="+encodeURIComponent(t+" "+QUIZ_URL);
+    setupImageShare(a,t);
   }
+
+  // ---------- Shareable result image ----------
+  var QUIZ_URL="https://wearehomegrown.ca/sparks-quiz";
+
+  function loadImg(src){
+    return new Promise(function(res){var im=new Image();im.onload=function(){res(im)};im.onerror=function(){res(null)};im.src=src});
+  }
+  function loadFonts(){
+    if(!document.fonts||!document.fonts.load)return Promise.resolve();
+    return Promise.all([
+      document.fonts.load("800 80px Poppins"),document.fonts.load("400 30px Poppins"),
+      document.fonts.load("700 30px Karla"),document.fonts.load("400 30px Karla")
+    ]).catch(function(){});
+  }
+  function wrap(ctx,text,maxW){
+    var words=String(text).split(/\s+/),lines=[],cur="";
+    words.forEach(function(w){
+      var t=cur?cur+" "+w:w;
+      if(ctx.measureText(t).width>maxW&&cur){lines.push(cur);cur=w}else cur=t;
+    });
+    if(cur)lines.push(cur);
+    return lines;
+  }
+  function fitLines(ctx,text,maxW,maxLines,size,min,weight,family){
+    var lines;
+    for(;size>=min;size-=4){
+      ctx.font=weight+" "+size+"px "+family;
+      lines=wrap(ctx,text,maxW);
+      var widest=0;lines.forEach(function(l){widest=Math.max(widest,ctx.measureText(l).width)});
+      if(lines.length<=maxLines&&widest<=maxW)break;
+    }
+    return {lines:lines,size:Math.max(size,min)};
+  }
+
+  function rrect(ctx,x,y,w,h,r){
+    ctx.beginPath();
+    if(ctx.roundRect){ctx.roundRect(x,y,w,h,r)}
+    else{ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+  }
+
+  // story=true draws a 1080x1920 Instagram Story; otherwise a 1080x1350 feed post.
+  // Stories keep text out of the top/bottom ~250px where Instagram overlays its UI.
+  function drawCard(a,logo,story){
+    var W=1080,H=story?1920:1350,P=88,top=story?230:P;
+    var c=document.createElement("canvas");c.width=W;c.height=H;
+    var ctx=c.getContext("2d");
+    var ls=function(v){if(ctx.letterSpacing!==undefined)ctx.letterSpacing=v};
+    // background + dot texture
+    ctx.fillStyle="#141414";ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(255,255,255,.07)";
+    for(var y=8;y<H;y+=18)for(var x=8;x<W;x+=18){ctx.beginPath();ctx.arc(x,y,2.4,0,Math.PI*2);ctx.fill()}
+    // burst
+    var pts=[380,0,450,250,690,110,510,300,760,380,510,460,690,650,450,510,380,760,310,510,70,650,250,460,0,380,250,300,70,110,310,250];
+    ctx.save();ctx.globalAlpha=.28;ctx.translate(W-480,H-(story?620:500));ctx.scale(1.25,1.25);
+    ctx.beginPath();for(var k=0;k<pts.length;k+=2){k?ctx.lineTo(pts[k],pts[k+1]):ctx.moveTo(pts[k],pts[k+1])}
+    ctx.closePath();ctx.fillStyle="#e87a6b";ctx.fill();ctx.restore();
+    // frame
+    ctx.strokeStyle="#3d4a4a";ctx.lineWidth=4;rrect(ctx,28,28,W-56,H-56,40);ctx.stroke();
+    // header
+    if(logo){var lw=260;ctx.drawImage(logo,P,top,lw,lw*logo.height/logo.width)}
+    ctx.textBaseline="alphabetic";ctx.textAlign="right";
+    ctx.font="800 34px Poppins, sans-serif";ctx.fillStyle="#e87a6b";
+    ls("5px");ctx.fillText("SPARKS",W-P,top+56);ls("0px");
+    ctx.textAlign="left";
+    // body
+    var y=story?660:390,maxW=W-P*2;
+    ctx.font="700 34px Karla, sans-serif";ctx.fillStyle="#9ba7a7";
+    ls("4px");ctx.fillText("MY STORYTELLER ARCHETYPE",P,y);ls("0px");
+    y+=40;
+    var name=fitLines(ctx,a.name.toUpperCase(),maxW,2,132,72,"800","Poppins, sans-serif");
+    ctx.fillStyle="#e87a6b";ctx.font="800 "+name.size+"px Poppins, sans-serif";
+    name.lines.forEach(function(l){y+=name.size*.98;ctx.fillText(l,P,y)});
+    y+=95;
+    ctx.fillStyle="#faf9f6";ctx.font="800 50px Poppins, sans-serif";
+    wrap(ctx,a.tag,maxW).forEach(function(l){ctx.fillText(l,P,y);y+=62});
+    // chips
+    y+=40;
+    var chips=[["Craft",ans.medium],["Learns best",ans.format]].filter(function(c){return c[1]});
+    var cx=P;
+    chips.forEach(function(ch){
+      ctx.font="400 30px Karla, sans-serif";var lw=ctx.measureText(ch[0]+"  ").width;
+      ctx.font="700 30px Karla, sans-serif";var vw=ctx.measureText(ch[1]).width;
+      var w=lw+vw+56;
+      if(cx+w>W-P){cx=P;y+=92}
+      rrect(ctx,cx,y,w,72,36);ctx.fillStyle="#1f2626";ctx.fill();
+      ctx.strokeStyle="#3d4a4a";ctx.lineWidth=3;ctx.stroke();
+      ctx.font="400 30px Karla, sans-serif";ctx.fillStyle="#9ba7a7";ctx.fillText(ch[0],cx+28,y+46);
+      ctx.font="700 30px Karla, sans-serif";ctx.fillStyle="#faf9f6";ctx.fillText(ch[1],cx+28+lw,y+46);
+      cx+=w+16;
+    });
+    // footer
+    var fy=story?H-300:H-P-20;
+    rrect(ctx,P,fy-118,90,8,4);ctx.fillStyle="#fcbc2e";ctx.fill();
+    ctx.fillStyle="#faf9f6";ctx.font="800 44px Poppins, sans-serif";
+    ctx.fillText("What kind of storyteller are you?",P,fy-50,maxW);
+    ctx.fillStyle="#fcbc2e";ctx.font="700 34px Karla, sans-serif";
+    ctx.fillText(QUIZ_URL.replace(/^https?:\/\//,""),P,fy+4);
+    return c;
+  }
+
+  function toFile(canvas,name){
+    return new Promise(function(res){
+      canvas.toBlob(function(b){
+        if(!b)return res(null);
+        var f=null;try{f=new File([b],name,{type:"image/png"})}catch(e){}
+        res({url:URL.createObjectURL(b),file:f,name:name});
+      },"image/png");
+    });
+  }
+
+  function setupImageShare(a,text){
+    var shareBtn=document.getElementById("shareimg"),storyBtn=document.getElementById("storyimg"),
+        saveBtn=document.getElementById("saveimg"),img=document.getElementById("card");
+    var slug="sparks-"+a.name.toLowerCase().replace(/[^a-z]+/g,"-").replace(/^-|-$/g,"");
+    var feed=null,story=null,canFile=false;
+    Promise.all([loadFonts(),loadImg("assets/homegrown-logo-white.png")]).then(function(r){
+      return Promise.all([toFile(drawCard(a,r[1],false),slug+".png"),toFile(drawCard(a,r[1],true),slug+"-story.png")]);
+    }).then(function(out){
+      feed=out[0];story=out[1];
+      if(!feed)return;
+      img.src=feed.url;
+      canFile=!!(feed.file&&navigator.canShare&&navigator.canShare({files:[feed.file]}));
+      shareBtn.disabled=storyBtn.disabled=saveBtn.disabled=false;
+      if(!canFile){shareBtn.style.display="none";saveBtn.className="btn block";saveBtn.textContent="Download my result card"}
+    });
+    function save(img,msg){
+      if(!img)return;
+      var l=document.createElement("a");l.href=img.url;l.download=img.name;document.body.appendChild(l);l.click();l.remove();
+      toast(msg||"Image saved. Post it anywhere!");
+    }
+    saveBtn.onclick=function(){save(feed)};
+    shareBtn.onclick=function(){
+      if(!canFile)return save(feed);
+      navigator.share({files:[feed.file],title:"My SPARKS storyteller archetype",text:text+" "+QUIZ_URL})
+        .catch(function(e){if(!e||e.name!=="AbortError")save(feed)});
+    };
+    // Websites can't open Instagram's story composer directly, so we hand a 9:16 image to the
+    // phone's share sheet (pick Instagram → Stories). Files only: adding text hides Instagram on some phones.
+    storyBtn.onclick=function(){
+      if(!story)return;
+      if(story.file&&navigator.canShare&&navigator.canShare({files:[story.file]})){
+        toast("Pick Instagram, then Stories");
+        navigator.share({files:[story.file]})
+          .catch(function(e){if(!e||e.name!=="AbortError")save(story,"Story image saved. Add it to your Instagram Story")});
+      }else save(story,"Story image saved. Post it from your phone");
+    };
+  }
+
 
   go(0);
 })();
