@@ -141,7 +141,7 @@ p { margin: 0; }
 .hg-top .funding-strip-inner a { display: inline-flex; align-items: center; gap: 0.3rem; text-decoration: underline; text-underline-offset: 0.2rem; white-space: nowrap; }
 .hg-top .site-header { background: var(--hg-paper); border-bottom: 1px solid rgba(52, 65, 65, 0.16); position: sticky; top: 0; z-index: 50; }
 .hg-top .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.6rem; }
-.hg-top .brand { display: block; width: 11rem; height: auto; padding-block: 0.55rem; overflow: hidden; }
+.hg-top .brand { display: block; flex-shrink: 1; min-width: 0; width: 11rem; height: auto; padding-block: 0.55rem; overflow: hidden; }
 .hg-top .brand img { width: 100%; height: auto; }
 .hg-top .button {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
@@ -169,6 +169,7 @@ p { margin: 0; }
 .hg-top .nav-dropdown.open .nav-dropdown-menu { display: flex; }
 .hg-top .nav-dropdown-menu a { padding: 0.6rem 0.75rem; font-weight: 750; font-size: 0.92rem; text-decoration: none; border-radius: 10px; }
 .hg-top .nav-dropdown-menu a:hover { background: var(--hg-soft); }
+.hg-top .mobile-actions { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
 .hg-top .mobile-nav { position: relative; }
 .hg-top .mobile-nav summary { display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid var(--hg-charcoal-deep); border-radius: 10px; padding: 0.5rem; list-style: none; }
 .hg-top .mobile-nav summary::-webkit-details-marker, .hg-top .mobile-nav summary::marker { display: none; content: ""; }
@@ -180,10 +181,13 @@ p { margin: 0; }
   box-shadow: 0.5rem 0.5rem 0 var(--hg-gold); padding: 0.75rem; display: flex; flex-direction: column;
 }
 .hg-top .mobile-nav nav a { padding: 0.8rem; font-weight: 800; text-decoration: none; }
-.hg-top .mobile-nav nav a:hover { background: var(--hg-soft); border-radius: 10px; }
+.hg-top .mobile-nav nav a.button { padding: 0.65rem 1rem; margin-block: 0.25rem; align-self: flex-start; }
+.hg-top .mobile-nav-label { margin: 0.5rem 0 0; padding: 0.4rem 0.8rem 0.2rem; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
+.hg-top .mobile-nav nav a.mobile-nav-sub { padding-block: 0.6rem; padding-left: 1.4rem; font-weight: 750; }
+.hg-top .mobile-nav nav a:not(.button):hover { background: var(--hg-soft); border-radius: 10px; }
 @media (min-width: 981px) {
   .hg-top .desktop-nav { display: flex; }
-  .hg-top .mobile-nav { display: none; }
+  .hg-top .mobile-actions { display: none; }
   .hg-top .brand { width: 14rem; }
 }
 @media (max-width: 759px) {
@@ -379,26 +383,30 @@ src="https://www.facebook.com/tr?id=2137911013458736&ev=PageView&noscript=1"
       </div>
       <a href="#donate" class="button button-gold button-small">Donate</a>
     </nav>
-    <details class="mobile-nav">
-      <summary aria-label="Open navigation">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
-      </summary>
-      <nav aria-label="Mobile navigation">
-        <a href="./">Home</a>
-        <a href="resources">Resources</a>
-        <a href="#programs">Programs</a>
-        <a href="#watch">Watch</a>
-        <a href="#team">Team &middot; Staff</a>
-        <a href="sponsor">Partnership</a>
-        <a href="nswp" aria-current="page">Nomad Social Work Project</a>
-        <a href="sparks">SPARKS &middot; Information</a>
-        <a href="sparks-quiz">SPARKS &middot; Storyteller Quiz</a>
-        <a href="sparks-application-mentee" target="_blank" rel="noreferrer">SPARKS &middot; Apply as a Mentee</a>
-        <a href="sparks-application-mentor" target="_blank" rel="noreferrer">SPARKS &middot; Become a Mentor</a>
-        <a href="login">SPARKS &middot; Mentee Portal</a>
-        <a href="login">Member sign-in</a>
-      </nav>
-    </details>
+    <div class="mobile-actions">
+      <a href="#donate" class="button button-gold button-small">Donate</a>
+      <details class="mobile-nav">
+        <summary aria-label="Open navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+        </summary>
+        <nav aria-label="Mobile navigation">
+          <a href="./">Home</a>
+          <a href="resources" class="button button-green button-small">Resources</a>
+          <a href="#programs">Programs</a>
+          <a href="#watch">Watch</a>
+          <p class="mobile-nav-label">Team</p>
+          <a class="mobile-nav-sub" href="#team">Staff</a>
+          <a href="sponsor">Partnership</a>
+          <a href="nswp" aria-current="page">NSWP</a>
+          <p class="mobile-nav-label">SPARKS</p>
+          <a class="mobile-nav-sub" href="sparks">Information</a>
+          <a class="mobile-nav-sub" href="sparks-quiz">Storyteller Quiz</a>
+          <a class="mobile-nav-sub" href="sparks-application-mentee" target="_blank" rel="noreferrer">Apply as a Mentee</a>
+          <a class="mobile-nav-sub" href="sparks-application-mentor" target="_blank" rel="noreferrer">Become a Mentor</a>
+          <a class="mobile-nav-sub" href="login">Mentee Portal</a>
+        </nav>
+      </details>
+    </div>
   </div>
 </header>
 </div>

@@ -333,6 +333,8 @@ textarea:focus-visible {
 
 .brand {
   display: block;
+  flex-shrink: 1;
+  min-width: 0;
   width: 11rem;
   height: auto;
   padding-block: 0.55rem;
@@ -419,6 +421,16 @@ textarea:focus-visible {
   background: var(--color-soft);
 }
 
+/* Mobile header mirrors the desktop one: the Donate button stays visible
+   beside the menu toggle, and the menu repeats the desktop links in the
+   same order, with Team and SPARKS shown as labelled groups. */
+.mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
 .mobile-nav {
   position: relative;
 }
@@ -449,6 +461,8 @@ textarea:focus-visible {
   top: calc(100% + 0.6rem);
   right: 0;
   width: 15rem;
+  max-height: calc(100vh - 9rem);
+  overflow-y: auto;
   background: var(--color-paper);
   border: 2px solid var(--color-charcoal-deep);
   border-radius: var(--radius);
@@ -464,7 +478,29 @@ textarea:focus-visible {
   text-decoration: none;
 }
 
-.mobile-nav nav a:hover {
+.mobile-nav nav a.button {
+  padding: 0.65rem 1rem;
+  margin-block: 0.25rem;
+  align-self: flex-start;
+}
+
+.mobile-nav-label {
+  margin: 0.5rem 0 0;
+  padding: 0.4rem 0.8rem 0.2rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.mobile-nav nav a.mobile-nav-sub {
+  padding-block: 0.6rem;
+  padding-left: 1.4rem;
+  font-weight: 750;
+}
+
+.mobile-nav nav a:not(.button):hover {
   background: var(--color-soft);
   border-radius: var(--radius-sm);
 }
@@ -473,7 +509,7 @@ textarea:focus-visible {
   .desktop-nav {
     display: flex;
   }
-  .mobile-nav {
+  .mobile-actions {
     display: none;
   }
   .brand {
@@ -653,7 +689,7 @@ textarea:focus-visible {
 
 .market-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
 }
 
@@ -1237,7 +1273,7 @@ textarea:focus-visible {
 
 .stat-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
   margin-top: 2.5rem;
 }
@@ -1262,6 +1298,38 @@ textarea:focus-visible {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+/* Phones: keep all three stat cards on one row, as on desktop. */
+@media (max-width: 600px) {
+  .market-stats,
+  .stat-row {
+    gap: 0.6rem;
+  }
+  .market-stats article,
+  .stat-row article {
+    padding: 1rem 0.7rem;
+  }
+  .market-stats strong,
+  .stat-row strong {
+    font-size: clamp(1.15rem, 5.6vw, 1.6rem);
+  }
+  .market-stats span,
+  .stat-row span {
+    font-size: 0.72rem;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 360px) {
+  .market-stats article,
+  .stat-row article {
+    padding: 0.85rem 0.5rem;
+  }
+  .stat-row span {
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+  }
 }
 
 .stat-note {

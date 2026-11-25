@@ -78,7 +78,8 @@ body.sparks {
   text-decoration-color: var(--sp-coral);
 }
 
-.sparks .desktop-nav .button {
+.sparks .desktop-nav .button,
+.sparks .mobile-actions .button {
   min-height: 2.75rem;
   padding: 0.65rem 1.1rem;
   font-size: 0.9rem;
@@ -112,7 +113,7 @@ body.sparks {
 }
 
 .sparks .nav-dropdown-menu a:hover,
-.sparks .mobile-nav nav a:hover {
+.sparks .mobile-nav nav a:not(.button):hover {
   background: var(--sp-bg);
   color: var(--sp-coral);
   border-radius: var(--sp-r-sm);
@@ -408,11 +409,26 @@ body.sparks {
     gap: 0.5rem;
   }
 
+  .sparks .stat-row strong {
+    font-size: clamp(1.3rem, 6.4vw, 1.9rem);
+  }
+  .sparks .stat-row span {
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+  }
+
   .sp-burst.hero {
     width: 520px;
     height: 520px;
     right: -260px;
     top: -80px;
+  }
+}
+
+@media (max-width: 360px) {
+  .sparks .stat-row span {
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
   }
 }
 
