@@ -8,12 +8,16 @@
 # staging just asks main's copy of this workflow to run.
 #
 # Requires: Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+#
+# DISABLED: Pages now deploys from a branch (main, root), so this workflow
+# no longer runs on push. To bring it back (and the /staging/ preview),
+# switch the Pages source back to "GitHub Actions" and restore:
+#   push:
+#     branches: [main, staging]
 
 name: Deploy site
 
 on:
-  push:
-    branches: [main, staging]
   workflow_dispatch:
 
 concurrency:
