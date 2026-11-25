@@ -105,20 +105,27 @@ body.sparks {
 }
 
 .sparks .nav-dropdown-menu a,
-.sparks .mobile-nav nav a {
+.sparks .mobile-nav nav a,
+.sparks .mobile-subnav summary {
   font-family: var(--sp-text);
   color: var(--sp-ink);
   border-radius: var(--sp-r-sm);
 }
 
 .sparks .nav-dropdown-menu a:hover,
-.sparks .mobile-nav nav a:hover {
+.sparks .mobile-nav nav a:hover,
+.sparks .mobile-subnav summary:hover {
   background: var(--sp-bg);
   color: var(--sp-coral);
   border-radius: var(--sp-r-sm);
 }
 
-.sparks .mobile-nav summary {
+.sparks .mobile-nav nav .mobile-subnav a {
+  border-left-color: var(--sp-line);
+  border-radius: 0;
+}
+
+.sparks .mobile-nav > summary {
   border: 2px solid var(--sp-line);
   border-radius: var(--sp-r-sm);
   color: var(--sp-ink);
