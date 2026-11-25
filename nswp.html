@@ -170,17 +170,24 @@ p { margin: 0; }
 .hg-top .nav-dropdown-menu a { padding: 0.6rem 0.75rem; font-weight: 750; font-size: 0.92rem; text-decoration: none; border-radius: 10px; }
 .hg-top .nav-dropdown-menu a:hover { background: var(--hg-soft); }
 .hg-top .mobile-nav { position: relative; }
-.hg-top .mobile-nav summary { display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid var(--hg-charcoal-deep); border-radius: 10px; padding: 0.5rem; list-style: none; }
-.hg-top .mobile-nav summary::-webkit-details-marker, .hg-top .mobile-nav summary::marker { display: none; content: ""; }
-.hg-top .mobile-nav[open] summary svg { transform: rotate(90deg); }
+.hg-top .mobile-nav > summary { display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid var(--hg-charcoal-deep); border-radius: 10px; padding: 0.5rem; list-style: none; }
+.hg-top .mobile-nav > summary::-webkit-details-marker, .hg-top .mobile-nav > summary::marker { display: none; content: ""; }
+.hg-top .mobile-nav[open] > summary svg { transform: rotate(90deg); }
 .hg-top .mobile-nav nav {
   position: absolute; top: calc(100% + 0.6rem); right: 0; width: 15rem;
   max-height: calc(100vh - 9rem); overflow-y: auto;
   background: var(--hg-paper); border: 2px solid var(--hg-charcoal-deep); border-radius: 14px;
   box-shadow: 0.5rem 0.5rem 0 var(--hg-gold); padding: 0.75rem; display: flex; flex-direction: column;
 }
-.hg-top .mobile-nav nav a { padding: 0.8rem; font-weight: 800; text-decoration: none; }
-.hg-top .mobile-nav nav a:hover { background: var(--hg-soft); border-radius: 10px; }
+.hg-top .mobile-nav nav a, .hg-top .mobile-subnav summary { padding: 0.5rem 0.75rem; font-weight: 800; line-height: 1.3; text-decoration: none; }
+.hg-top .mobile-nav nav a:hover, .hg-top .mobile-subnav summary:hover { background: var(--hg-soft); border-radius: 10px; }
+.hg-top .mobile-subnav { display: flex; flex-direction: column; }
+.hg-top .mobile-subnav summary { display: flex; align-items: center; justify-content: space-between; cursor: pointer; list-style: none; }
+.hg-top .mobile-subnav summary::-webkit-details-marker, .hg-top .mobile-subnav summary::marker { display: none; content: ""; }
+.hg-top .mobile-subnav summary::after { content: ""; width: 0.45rem; height: 0.45rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translate(-2px, -2px); transition: transform 0.15s ease; }
+.hg-top .mobile-subnav[open] summary::after { transform: rotate(225deg) translate(-2px, -2px); }
+.hg-top .mobile-subnav[open] { margin-bottom: 0.25rem; }
+.hg-top .mobile-nav nav .mobile-subnav a { margin-left: 0.75rem; padding-left: 0.75rem; border-left: 2px solid var(--hg-soft); border-radius: 0; font-weight: 700; }
 @media (min-width: 981px) {
   .hg-top .desktop-nav { display: flex; }
   .hg-top .mobile-nav { display: none; }
@@ -391,11 +398,14 @@ src="https://www.facebook.com/tr?id=2137911013458736&ev=PageView&noscript=1"
         <a href="#team">Team &middot; Staff</a>
         <a href="sponsor">Partnership</a>
         <a href="nswp" aria-current="page">Nomad Social Work Project</a>
-        <a href="sparks">SPARKS &middot; Information</a>
-        <a href="sparks-quiz">SPARKS &middot; Storyteller Quiz</a>
-        <a href="sparks-application-mentee" target="_blank" rel="noreferrer">SPARKS &middot; Apply as a Mentee</a>
-        <a href="sparks-application-mentor" target="_blank" rel="noreferrer">SPARKS &middot; Become a Mentor</a>
-        <a href="login">SPARKS &middot; Mentee Portal</a>
+        <details class="mobile-subnav">
+          <summary>SPARKS</summary>
+          <a href="sparks">Information</a>
+          <a href="sparks-quiz">Storyteller Quiz</a>
+          <a href="sparks-application-mentee" target="_blank" rel="noreferrer">Apply as a Mentee</a>
+          <a href="sparks-application-mentor" target="_blank" rel="noreferrer">Become a Mentor</a>
+          <a href="login">Mentee Portal</a>
+        </details>
         <a href="login">Member sign-in</a>
       </nav>
     </details>
